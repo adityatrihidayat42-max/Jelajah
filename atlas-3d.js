@@ -159,6 +159,9 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
     const dock=new THREE.Mesh(new THREE.BoxGeometry(.56,.08,.18),mat(0x9a704c));dock.position.set(.8,.13,.63);g.add(dock);
     const buoy=new THREE.Mesh(new THREE.SphereGeometry(.09,8,6),mat(0xf0bd78));buoy.position.set(.98,.24,.64);g.add(buoy);
     g.userData.countryIndex=index;
+    // Generous invisible touch target: easier to select a small island on phones.
+    const touchTarget=new THREE.Mesh(new THREE.CylinderGeometry(1.42,1.42,1.45,20),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,colorWrite:false}));
+    touchTarget.position.y=.68;touchTarget.userData.countryIndex=index;g.add(touchTarget);
     const angle=(index/10)*Math.PI*2-Math.PI/2;
     const radius=index%2===0?5.45:6.55;
     g.position.set(Math.cos(angle)*radius,Math.sin(index*1.7)*.18,Math.sin(angle)*radius*.63);
