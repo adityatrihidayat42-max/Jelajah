@@ -593,6 +593,17 @@
   .island,.atlas-cloud,.atlas-bottom-note .live-pulse{animation:none!important}
 }
 
+
+/* THREE.JS 3D ATLAS */
+.atlas-three-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;touch-action:pan-y;cursor:grab}
+.atlas-three-canvas:active{cursor:grabbing}
+.has-three-atlas .atlas-ocean,.has-three-atlas .atlas-halo,.has-three-atlas .atlas-routes,.has-three-atlas .atlas-orbit,.has-three-atlas .atlas-cloud,.has-three-atlas .atlas-plane,.has-three-atlas .atlas-boat{display:none!important}
+.has-three-atlas #islands .island{opacity:0!important;pointer-events:none!important}
+.has-three-atlas .atlas-bottom-note,.has-three-atlas .atlas-label{z-index:8}
+@media(max-width:850px){
+ .atlas-three-canvas{z-index:4}
+ .has-three-atlas .atlas-bottom-note{bottom:4%}
+}
 </style>
 </head>
 <body>
@@ -780,4 +791,4 @@ $("#language").onclick=()=>{lang=lang==="id"?"en":"id";$("#language").textConten
 $("#sound").onclick=()=>{muted=!muted;$("#sound").textContent=muted?"♫ SOUND OFF":"♫ SOUND ON";toast(muted?"Suara dimatikan":"Suara belum tersedia pada versi ini")};
 let sx=0;$("#sceneWrap").addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});$("#sceneWrap").addEventListener("touchend",e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)region(ri+(dx<0?1:-1))},{passive:true});
 window.addEventListener("keydown",e=>{if(e.key==="Escape")close();if(e.key==="ArrowRight"&&!$("#world").classList.contains("hidden"))region(ri+1);if(e.key==="ArrowLeft"&&!$("#world").classList.contains("hidden"))region(ri-1)});
-</script></body></html>
+</script><script type="module" src="./atlas-3d.js"></script></body></html>
