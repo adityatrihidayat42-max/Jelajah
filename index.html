@@ -443,6 +443,35 @@
  .atlas-halo,.atlas-ocean:before,.atlas-ocean:after,.atlas-cloud,.live-pulse,.island-spark{animation:none!important}
 }
 
+
+/* DESTINATION JOURNAL / DISTINCT REGIONAL ATMOSPHERE */
+.destination-journal{position:absolute;z-index:8;left:clamp(22px,6vw,90px);top:calc(15% + 225px);width:min(330px,29vw);padding:13px 15px;background:linear-gradient(145deg,#092e45d9,#164957c9);border:1px solid #f3e5c755;border-radius:4px 15px 4px 15px;box-shadow:0 16px 38px #061d2d55;backdrop-filter:blur(15px);color:#f7ead3}
+.journal-top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:7px;letter-spacing:1.4px;color:#e8c28e}
+.journal-top b{font-size:6px;letter-spacing:1px;color:#d8e8d9;text-align:right}
+.destination-journal h3{font:500 17px Georgia,serif;margin:9px 0;color:#fff4df}
+.journal-tags{display:flex;flex-wrap:wrap;gap:6px}
+.journal-tags span{padding:5px 7px;border:1px solid #e8eadc38;border-radius:3px;background:#e8eadc12;font-size:7px;text-transform:uppercase;letter-spacing:.8px;color:#dce8dc}
+.journal-bottom{display:flex;align-items:center;gap:7px;margin-top:10px;padding-top:8px;border-top:1px solid #e8eadc2b}
+.journal-bottom i{width:6px;height:6px;border-radius:50%;background:#b9d6a0;box-shadow:0 0 10px #b9d6a0}
+.journal-bottom span{font-size:6px;letter-spacing:1.5px;color:#b8d0c5}
+.journal-bottom b{margin-left:auto;color:#e8c28e}
+#art .region-particle{animation:regionDrift 8s ease-in-out infinite alternate}
+#art .region-particle:nth-child(3n){animation-delay:-3s}
+#art .region-lantern{transform-box:fill-box;transform-origin:top;animation:lanternRock 3s ease-in-out infinite alternate}
+#art .region-palm{transform-box:fill-box;transform-origin:bottom;animation:palmRock 5s ease-in-out infinite alternate}
+@keyframes regionDrift{from{translate:-5px -3px;opacity:.25}to{translate:10px 14px;opacity:.85}}
+@keyframes lanternRock{from{rotate:-3deg}to{rotate:3deg}}
+@keyframes palmRock{from{rotate:-2deg}to{rotate:3deg}}
+@media(max-width:850px){
+ .destination-journal{top:auto;bottom:111px;left:10px;width:min(220px,47vw);padding:8px 9px}
+ .journal-top{font-size:5px;letter-spacing:1px}.journal-top b{font-size:5px}
+ .destination-journal h3{font-size:12px;margin:6px 0}
+ .journal-tags{gap:3px}.journal-tags span{font-size:5px;padding:4px 5px}
+ .journal-bottom{margin-top:6px;padding-top:5px}.journal-bottom span{font-size:5px}
+}
+@media(max-width:390px){.destination-journal{bottom:103px;width:45vw}.journal-tags span{font-size:4.5px}}
+@media(prefers-reduced-motion:reduce){#art .region-particle,#art .region-lantern,#art .region-palm{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -512,7 +541,49 @@ const $=s=>document.querySelector(s);
 function toast(t){let e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>e.classList.remove("show"),2200)}
 function enter(i){ci=i;ri=0;$("#landing").classList.add("hide");$("#world").classList.remove("hidden");render();if(!visited.includes(i))visited.push(i);localStorage.setItem("jelajahVisited",JSON.stringify(visited));toast("Selamat datang di "+C[i][1]+"!")}
 function icon(k){return ({temple:"🏯",tower:"🏙",mountain:"⛰",pagoda:"🏮",castle:"🏰",bridge:"🌉",clock:"🕰",chalet:"🏡",islet:"🏝",trees:"🌳",mosque:"🕌",desert:"🏜",oldtown:"🏘",colosseum:"🏛",dome:"⛪",coast:"🌊",snow:"❄",pyramid:"🔺",boat:"⛵",oasis:"🌴",waterfall:"💦",forest:"🌲",wildlife:"🦜",statue:"🗽",lighthouse:"🗼",lavender:"✿",palace:"🏯",stones:"◈",lake:"🏞"})[k]||"✦"}
-function render(){let c=C[ci],r=c[4][ri];$("#eyebrow").textContent=c[0]+" "+c[1].toUpperCase()+" · "+String(ri+1).padStart(2,"0")+" / 05";$("#title").textContent=r[0];$("#desc").textContent=r[1];let tags=$("#fieldTags");if(tags)tags.remove();$("#desc").insertAdjacentHTML("afterend",'<div class="field-tags" id="fieldTags"><span>✦ '+r[3].split(" · ")[0]+'</span><span>◈ MINIATURE FIELD GUIDE</span></div>');$("#destinationName").textContent=r[0];$("#art").innerHTML=scene(r,c);$("#regions").innerHTML=c[4].map((x,i)=>'<button class="region-card '+(i===ri?"active":"")+'" data-r="'+i+'"><div class="region-art" style="--c1:'+c[3][0]+';--c2:'+c[3][1]+'">'+icon(x[2])+'</div><b>'+x[0]+'</b><small>EXPLORE REGION</small></button>').join("");$("#regions").querySelectorAll("button").forEach(b=>b.onclick=()=>region(+b.dataset.r));$("#timeBtn").textContent="◷ "+["PAGI","SIANG","SENJA","MALAM"][time];$("#weatherBtn").textContent=({sun:"☀ CERAH",rain:"☂ HUJAN",snow:"❄ SALJU",fog:"☁ KABUT"})[weather];$("#favBtn").textContent=favs.includes(ci+"-"+ri)?"♥ TERSIMPAN":"♡ FAVORIT";$("#sky").style.background=weather==="rain"?"linear-gradient(180deg,#829aa5,#9caaa5 55%,#b8aa92)":weather==="fog"?"linear-gradient(180deg,#aabbb8,#c5c8b6 60%,#d6c4a5)":weather==="snow"?"linear-gradient(180deg,#b8d5df,#dce4dc 60%,#e7e8d8)": ["linear-gradient(180deg,#8bc5c4,#d9d0a8 72%,#d7b98d)","linear-gradient(180deg,#8bc9d3,#d6e0bd 70%,#c8b88c)","linear-gradient(180deg,#e49f82,#e7c29b 65%,#aa8b78)","linear-gradient(180deg,#172d4e,#415a75 60%,#657c7c)"][time]}
+function render(){let c=C[ci],r=c[4][ri];$("#eyebrow").textContent=c[0]+" "+c[1].toUpperCase()+" · "+String(ri+1).padStart(2,"0")+" / 05";$("#title").textContent=r[0];$("#desc").textContent=r[1];let tags=$("#fieldTags");if(tags)tags.remove();$("#desc").insertAdjacentHTML("afterend",'<div class="field-tags" id="fieldTags"><span>✦ '+r[3].split(" · ")[0]+'</span><span>◈ MINIATURE FIELD GUIDE</span></div>');$("#fieldTags").insertAdjacentHTML("afterend",journalMarkup(r,c));$("#destinationName").textContent=r[0];$("#art").innerHTML=scene(r,c);$("#regions").innerHTML=c[4].map((x,i)=>'<button class="region-card '+(i===ri?"active":"")+'" data-r="'+i+'"><div class="region-art" style="--c1:'+c[3][0]+';--c2:'+c[3][1]+'">'+icon(x[2])+'</div><b>'+x[0]+'</b><small>EXPLORE REGION</small></button>').join("");$("#regions").querySelectorAll("button").forEach(b=>b.onclick=()=>region(+b.dataset.r));$("#timeBtn").textContent="◷ "+["PAGI","SIANG","SENJA","MALAM"][time];$("#weatherBtn").textContent=({sun:"☀ CERAH",rain:"☂ HUJAN",snow:"❄ SALJU",fog:"☁ KABUT"})[weather];$("#favBtn").textContent=favs.includes(ci+"-"+ri)?"♥ TERSIMPAN":"♡ FAVORIT";$("#sky").style.background=weather==="rain"?"linear-gradient(180deg,#829aa5,#9caaa5 55%,#b8aa92)":weather==="fog"?"linear-gradient(180deg,#aabbb8,#c5c8b6 60%,#d6c4a5)":weather==="snow"?"linear-gradient(180deg,#b8d5df,#dce4dc 60%,#e7e8d8)": ["linear-gradient(180deg,#8bc5c4,#d9d0a8 72%,#d7b98d)","linear-gradient(180deg,#8bc9d3,#d6e0bd 70%,#c8b88c)","linear-gradient(180deg,#e49f82,#e7c29b 65%,#aa8b78)","linear-gradient(180deg,#172d4e,#415a75 60%,#657c7c)"][time]}
+
+const destinationMood={
+ Indonesia:{plant:"tropical",roof:"#c66f50",accent:"#e8c28c",label:"TROPICAL ARCHIPELAGO"},
+ Jepang:{plant:"sakura",roof:"#a94f57",accent:"#edb9c7",label:"SAKURA SEASON"},
+ "Korea Selatan":{plant:"ginkgo",roof:"#7c6470",accent:"#c2d7e6",label:"OLD & NEW KOREA"},
+ Inggris:{plant:"oak",roof:"#6f7b82",accent:"#c5d2ce",label:"COUNTRYSIDE STORIES"},
+ "Arab Saudi":{plant:"palm",roof:"#b17b4f",accent:"#f0d19b",label:"DESERT OASIS"},
+ Swiss:{plant:"pine",roof:"#785b4b",accent:"#e7f1ee",label:"ALPINE ESCAPE"},
+ Italia:{plant:"cypress",roof:"#b96e50",accent:"#edc18f",label:"MEDITERRANEAN LIFE"},
+ Prancis:{plant:"plane",roof:"#8c789e",accent:"#e7c7bd",label:"ART & GARDENS"},
+ Mesir:{plant:"date-palm",roof:"#c28b52",accent:"#f0d19b",label:"ANCIENT RIVER KINGDOM"},
+ Brasil:{plant:"rainforest",roof:"#c46f56",accent:"#b8d991",label:"RAINFOREST RHYTHM"}
+};
+const regionMood={
+ temple:["COURTYARD","stone stairs","incense garden"],tower:["SKYLINE","rooftop lights","city tram"],islet:["LAGOON","coral reef","sandbar"],mountain:["HIGHLANDS","summit trail","lookout"],pagoda:["TEMPLE GARDEN","lantern lane","maple grove"],castle:["OLD QUARTER","stone wall","watch tower"],chalet:["ALPINE VILLAGE","flower meadow","cable lift"],bridge:["WATERFRONT","river boats","stone quay"],desert:["SANDSTONE VALLEY","oasis palms","caravan trail"],mosque:["COURTYARD OF LIGHT","minaret","geometric garden"],oldtown:["HERITAGE LANE","market stalls","painted balconies"],colosseum:["ANCIENT FORUM","marble columns","cypress walk"],dome:["GRAND PIAZZA","fountain","arcade"],coast:["COASTAL WALK","sea cliff","lighthouse"],snow:["GLACIER FRONTIER","snow pines","ski trail"],pyramid:["GOLDEN PLATEAU","desert track","ancient stones"],boat:["RIVER SETTLEMENT","wooden dock","reed beds"],oasis:["PALM OASIS","spring pool","mud-brick homes"],waterfall:["MISTY FALLS","fern garden","rainbow spray"],forest:["DEEP FOREST","canopy path","wood bridge"],wildlife:["WILDLIFE RESERVE","riverbank","bird lookout"],statue:["HILLTOP MONUMENT","view terrace","funicular"],lighthouse:["STORM COAST","rocky cove","fishing boats"],lavender:["FLOWER COUNTRY","lavender rows","stone village"],palace:["ROYAL GARDENS","ornamental pond","garden wall"],stones:["ANCIENT LANDSCAPE","heather field","standing stones"],lake:["LAKESIDE RETREAT","wood pier","mountain reflection"],trees:["TREE-LINED ISLAND","shaded path","wood bridge"]
+};
+function regionIdentity(r,c){
+ const country=destinationMood[c[1]]||destinationMood.Indonesia;
+ const motif=regionMood[r[2]]||regionMood.mountain;
+ const seed=r[0].split("").reduce((n,ch)=>n+ch.charCodeAt(0),0);
+ return {country,motif,seed};
+}
+function journalMarkup(r,c){
+ const d=regionIdentity(r,c);
+ return '<div class="destination-journal"><div class="journal-top"><span>FIELD JOURNAL / '+String(d.seed%99).padStart(2,"0")+'</span><b>'+d.country.label+'</b></div><h3>'+d.motif[0]+'</h3><div class="journal-tags"><span>'+d.motif[1]+'</span><span>'+d.motif[2]+'</span></div><div class="journal-bottom"><i></i><span>MINIATURE REGION STUDY</span><b>✦</b></div></div>';
+}
+function regionalAtmosphere(r,c){
+ const d=regionIdentity(r,c),seed=d.seed;
+ const leaves=Array.from({length:18},(_,i)=>{
+  const x=(seed*7+i*53)%960,y=130+(i*37+seed)%250;
+  const fill=d.country.plant==="sakura"?"#f3b9c8":d.country.plant==="ginkgo"?"#e7cb83":d.country.plant==="palm"?"#82b879":d.country.plant==="pine"?"#8bb59a":d.country.plant==="cypress"?"#a8bd88":"#b4c88d";
+  return '<circle class="region-particle" cx="'+x+'" cy="'+y+'" r="'+(2+i%3)+'" fill="'+fill+'" opacity=".72"/>';
+ }).join("");
+ const lanterns=d.country.plant==="sakura"||d.country.plant==="ginkgo"
+  ?Array.from({length:5},(_,i)=>'<g class="region-lantern" transform="translate('+(180+i*145)+' '+(275+(i%2)*18)+')"><path d="M0 -17v-9" stroke="#6b5145" stroke-width="2"/><rect x="-6" y="-17" width="12" height="17" rx="3" fill="'+d.country.accent+'"/><path d="M-7 -14h14" stroke="#fff0d5" stroke-width="2"/></g>').join("")
+  :"";
+ const palms=["tropical","palm","date-palm","rainforest"].includes(d.country.plant)
+  ?Array.from({length:3},(_,i)=>'<g class="region-palm" transform="translate('+(105+i*365)+' '+(370+i%2*12)+')"><path d="M0 0q8-48 2-82" stroke="#79563c" stroke-width="8" fill="none"/><path d="M2 -80q-44-23-57 0 32-8 57 7-14-40 6-55 9 28-1 55 32-39 54-22-18 8-53 25 42-4 50 23-29-17-53-18" fill="#61966b"/></g>').join("")
+  :"";
+ return '<g class="regional-atmosphere">'+leaves+lanterns+palms+'</g>';
+}
+
 function scene(r,c){
  const type=r[2],desert=c[1]==="Arab Saudi"||c[1]==="Mesir",snowy=c[1]==="Swiss"||type==="snow"||type==="mountain",water=type==="islet"||type==="boat"||type==="waterfall"||type==="coast"||type==="bridge",forest=type==="forest"||type==="wildlife"||type==="trees";
  const ground=desert?"#cda36a":snowy?"#b7d0ca":forest?"#6e9a68":"#75a879",sky=["#fff0c5","#f4d9a8","#e7a28b","#263b62"][time],accent=desert?"#e6bd7c":snowy?"#eaf3e8":"#b5d69a",landmark=shapes[type]||shapes.mountain;
@@ -536,6 +607,7 @@ function scene(r,c){
  const path='<path d="M65 475Q190 430 290 460T510 447Q690 420 930 468" fill="none" stroke="#f2dfb9" stroke-width="18" stroke-linecap="round"/><path d="M65 475Q190 430 290 460T510 447Q690 420 930 468" fill="none" stroke="#b58e68" stroke-width="2" stroke-dasharray="5 12"/>';
  const landmarkGroup='<g class="landmark" transform="translate(400 170) scale(2.35)" stroke-linejoin="round" filter="url(#softShadow)">'+landmark+'</g>';
  const garden='<g class="garden">'+flowers+'</g>';
+ const regional=regionalAtmosphere(r,c);
  return '<defs><linearGradient id="skygrad" x2="0" y2="1"><stop stop-color="'+sky+'"/><stop offset="1" stop-color="'+c[3][1]+'"/></linearGradient><linearGradient id="islandgrad" x2="0" y2="1"><stop stop-color="'+ground+'"/><stop offset="1" stop-color="'+(desert?"#9e774d":snowy?"#738f88":"#426d55")+'"/></linearGradient><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#76c7bd"/><stop offset="1" stop-color="#14536e"/></linearGradient><linearGradient id="sunGlow"><stop stop-color="#fff5c8" stop-opacity=".65"/><stop offset="1" stop-color="#fff5c8" stop-opacity="0"/></linearGradient><filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#193b42" flood-opacity=".32"/></filter></defs><rect width="1000" height="620" fill="url(#skygrad)"/><circle cx="'+(time===3?780:820)+'" cy="105" r="'+(time===3?24:43)+'" fill="'+(time===3?"#fff0c4":"#fff2c1")+'" opacity=".94"/><circle cx="820" cy="105" r="105" fill="url(#sunGlow)"/>'+stars+cloud+farBirds+'<path d="M0 355Q150 245 300 330T600 295T1000 320V620H0Z" fill="#668e83" opacity=".48"/>'+ridges+'<path d="M0 410Q160 365 300 400T620 382T1000 405V620H0Z" fill="url(#sea)"/>'+waves+'<ellipse cx="500" cy="482" rx="405" ry="115" fill="#103f51" opacity=".25"/><path d="M75 405Q120 325 260 330Q360 275 475 300Q610 255 730 320Q860 310 925 402Q850 482 700 500H280Q130 480 75 405Z" fill="url(#islandgrad)" stroke="#d2dfb1" stroke-width="7"/>'+dunes+'<path d="M130 401Q240 350 315 369Q450 315 545 345Q680 305 830 378" fill="none" stroke="'+accent+'" stroke-width="18" opacity=".42"/>'+path+trees+buildings+landmarkGroup+waterFeature+market+people+garden+boat+fireflies+rain+snow';
 }
 function region(i){ri=(i+5)%5;render();$("#sceneWrap").classList.remove("zoom");toast("Destinasi: "+C[ci][4][ri][0])}
