@@ -668,6 +668,36 @@
   .hero-title{max-width:520px}
 }
 
+
+/* FINAL MOBILE FIX: compact dock, safe title wrapping, reachable controls */
+@media(max-width:850px){
+  .atlas{bottom:198px!important}
+  .intro{
+    left:12px!important;right:12px!important;bottom:9px!important;
+    max-height:184px!important;overflow:hidden!important;
+    padding:12px 14px 11px!important;border-radius:16px 16px 7px 16px!important;
+  }
+  .hero-title{
+    display:block!important;width:100%!important;max-width:100%!important;
+    font-size:clamp(26px,6.8vw,34px)!important;line-height:.96!important;
+    letter-spacing:-1.1px!important;margin:7px 0 6px!important;
+    overflow-wrap:normal!important;word-break:normal!important;
+  }
+  .hero-title span{display:block!important;margin:2px 0 0!important;white-space:normal!important}
+  .hero-copy{font-size:9px!important;line-height:1.38!important;margin:0 0 6px!important}
+  .start-hint{font-size:6px!important;margin-top:5px!important;white-space:normal!important}
+  .hero-actions{margin-top:7px!important;position:relative!important;z-index:40!important}
+  .hero-primary{min-height:42px!important;padding:10px 13px!important;font-size:8px!important;position:relative!important;z-index:41!important;pointer-events:auto!important;touch-action:manipulation!important}
+  .atlas-three-canvas{z-index:5!important;pointer-events:auto!important;touch-action:none!important}
+  .site-header{z-index:50!important}
+}
+@media(max-width:390px){
+  .atlas{bottom:190px!important}
+  .intro{max-height:178px!important;padding:10px 12px!important}
+  .hero-title{font-size:clamp(25px,7vw,29px)!important}
+  .hero-copy{font-size:8px!important}
+  .hero-primary{font-size:7px!important;min-height:40px!important}
+}
 </style>
 </head>
 <body>
