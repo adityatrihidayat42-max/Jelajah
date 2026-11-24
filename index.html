@@ -472,6 +472,14 @@
 @media(max-width:390px){.destination-journal{bottom:103px;width:45vw}.journal-tags span{font-size:4.5px}}
 @media(prefers-reduced-motion:reduce){#art .region-particle,#art .region-lantern,#art .region-palm{animation:none!important}}
 
+
+/* REGION SIGNATURE DETAILS */
+#art .signature,#art .local-life{filter:drop-shadow(0 8px 6px #1d3b3b55);transform-origin:center bottom;animation:signatureReveal .8s cubic-bezier(.2,.8,.2,1) both}
+#art .local-life{animation:lifeDrift 5s ease-in-out infinite alternate}
+@keyframes signatureReveal{from{opacity:0;transform:translateY(18px) scale(.88)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes lifeDrift{from{translate:-3px 0}to{translate:5px -2px}}
+@media(prefers-reduced-motion:reduce){#art .signature,#art .local-life{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -606,9 +614,29 @@ function scene(r,c){
  const boat='<g class="boat" transform="translate(755 463)"><path d="M0 0h112l-19 24H18z" fill="#80563c" stroke="#f1d7ae" stroke-width="2"/><path d="M53 0V-61l47 61z" fill="#fff1d4" stroke="#cda982" stroke-width="2"/><path d="M53 -61V0" stroke="#654832" stroke-width="4"/></g>';
  const path='<path d="M65 475Q190 430 290 460T510 447Q690 420 930 468" fill="none" stroke="#f2dfb9" stroke-width="18" stroke-linecap="round"/><path d="M65 475Q190 430 290 460T510 447Q690 420 930 468" fill="none" stroke="#b58e68" stroke-width="2" stroke-dasharray="5 12"/>';
  const landmarkGroup='<g class="landmark" transform="translate(400 170) scale(2.35)" stroke-linejoin="round" filter="url(#softShadow)">'+landmark+'</g>';
+
  const garden='<g class="garden">'+flowers+'</g>';
+ // A unique miniature landmark layer for every destination family.
+ const signature={
+ temple:'<g><path d="M205 345v-45h18v45m-25-45h32l-16-22z" fill="#b86c48" stroke="#f3d7a8" stroke-width="3"/><path d="M193 302h42m-35-10h28" stroke="#f4d9ad" stroke-width="5"/></g>',
+ tower:'<g><path d="M780 360l18-125 18 125z" fill="#d9e5df" stroke="#668b87" stroke-width="3"/><path d="M790 290h16m-19 28h22m-25 22h28" stroke="#cf6555" stroke-width="7"/><circle cx="798" cy="230" r="7" fill="#f8dfaa"/></g>',
+ pagoda:'<g><path d="M735 350v-65h40v65" fill="#b84f43"/><path d="M724 288l31-18 31 18zm6-22l25-16 25 16zm8-20l17-14 17 14z" fill="#344e49" stroke="#edc783" stroke-width="3"/></g>',
+ mountain:'<g><path d="M620 350l75-170 75 170z" fill="#78999a"/><path d="M695 180l-28 65 28-14 25 18z" fill="#fff8e9"/></g>',
+ bridge:'<g><path d="M660 410q90-100 180 0" fill="none" stroke="#e6d4b2" stroke-width="13"/><path d="M675 390v-35m150 35v-35M680 375q55 55 140 0" fill="none" stroke="#8c6148" stroke-width="5"/></g>',
+ castle:'<g><path d="M680 350v-75h28v75m25 0v-100h30v100m25 0v-72h28v72" fill="#c4b79e" stroke="#f1e1c4" stroke-width="3"/><path d="M676 276l18-24 18 24m17-26l19-26 19 26m17 26l18-24 18 24" fill="#a95e50"/><path d="M742 350v-32q15-20 30 0v32" fill="#77513d"/></g>',
+ coast:'<g><path d="M690 390q35-35 70 0t70 0" fill="none" stroke="#fff1cf" stroke-width="7"/><path d="M710 370q30-24 60 0t60 0" fill="none" stroke="#7bd0cb" stroke-width="5"/></g>',
+ pyramid:'<g><path d="M680 365l72-130 72 130z" fill="#d7ac69" stroke="#f3d9a9" stroke-width="3"/><path d="M752 235v130h72z" fill="#b9824c"/></g>',
+ waterfall:'<g><path d="M720 260h90v55h-90z" fill="#5b886d"/><path d="M746 310v100m20-100v110m20-110v94" stroke="#c9f5ed" stroke-width="10" stroke-linecap="round"/><path d="M730 412q45-17 90 0" fill="none" stroke="#a7e6df" stroke-width="8"/></g>',
+ forest:'<g>'+Array.from({length:5},(_,i)=>'<path d="M'+(690+i*35)+' 380l18 -'+(95+i%3*17)+' 18 '+(95+i%3*17)+'z" fill="'+(i%2?'#3d7657':'#588d60')+'" stroke="#a7c98a" stroke-width="2"/>').join("")+'</g>',
+ boat:'<g><path d="M680 390h135l-22 25h-91z" fill="#80553a" stroke="#f0d5a8" stroke-width="3"/><path d="M748 389v-94l65 94z" fill="#fff1d8" stroke="#bd9b70" stroke-width="3"/></g>',
+ lighthouse:'<g><path d="M735 375l13-110h35l13 110z" fill="#f0e4c9" stroke="#a47a61" stroke-width="3"/><path d="M741 290h49l-6-19h-37z" fill="#c85e50"/><path d="M749 265v-15h34v15" fill="#f5dca5"/></g>',
+ oasis:'<g><ellipse cx="760" cy="395" rx="75" ry="22" fill="#49a9aa" stroke="#d6eee0" stroke-width="4"/><path d="M760 385v-85m0 12q-40-38-68-8q38 27 68 8q28-42 64-19q-20 37-64 19" fill="#5e995d" stroke="#d4e1a4" stroke-width="3"/></g>',
+ lavender:'<g>'+Array.from({length:11},(_,i)=>'<path d="M'+(690+i*16)+' 405l'+(i%2?7:-5)+' -'+(45+i%4*9)+'" stroke="#648b5d" stroke-width="4"/><circle cx="'+(695+i*16)+'" cy="'+(357-i%4*9)+'" r="6" fill="#a98bc9"/>').join("")+'</g>'
+ };
+ const regionalAccent=signature[type]||'<g><path d="M700 370q45-65 90 0" fill="none" stroke="#f2d7a5" stroke-width="5" opacity=".8"/><circle cx="745" cy="300" r="16" fill="#fff0c4" opacity=".35"/></g>';
+ const localLife='<g class="local-life"><path d="M95 430q18-20 36 0m-18-8v18m-10-12l-8 9m18-9l9 9" stroke="#f4e4c5" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="130" cy="420" r="5" fill="#e9b48f"/><path d="M130 426v14m0-8l-6 7m6-7l7 7" stroke="#f4d8ac" stroke-width="3" stroke-linecap="round"/></g>';
  const regional=regionalAtmosphere(r,c);
- return '<defs><linearGradient id="skygrad" x2="0" y2="1"><stop stop-color="'+sky+'"/><stop offset="1" stop-color="'+c[3][1]+'"/></linearGradient><linearGradient id="islandgrad" x2="0" y2="1"><stop stop-color="'+ground+'"/><stop offset="1" stop-color="'+(desert?"#9e774d":snowy?"#738f88":"#426d55")+'"/></linearGradient><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#76c7bd"/><stop offset="1" stop-color="#14536e"/></linearGradient><linearGradient id="sunGlow"><stop stop-color="#fff5c8" stop-opacity=".65"/><stop offset="1" stop-color="#fff5c8" stop-opacity="0"/></linearGradient><filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#193b42" flood-opacity=".32"/></filter></defs><rect width="1000" height="620" fill="url(#skygrad)"/><circle cx="'+(time===3?780:820)+'" cy="105" r="'+(time===3?24:43)+'" fill="'+(time===3?"#fff0c4":"#fff2c1")+'" opacity=".94"/><circle cx="820" cy="105" r="105" fill="url(#sunGlow)"/>'+stars+cloud+farBirds+'<path d="M0 355Q150 245 300 330T600 295T1000 320V620H0Z" fill="#668e83" opacity=".48"/>'+ridges+'<path d="M0 410Q160 365 300 400T620 382T1000 405V620H0Z" fill="url(#sea)"/>'+waves+'<ellipse cx="500" cy="482" rx="405" ry="115" fill="#103f51" opacity=".25"/><path d="M75 405Q120 325 260 330Q360 275 475 300Q610 255 730 320Q860 310 925 402Q850 482 700 500H280Q130 480 75 405Z" fill="url(#islandgrad)" stroke="#d2dfb1" stroke-width="7"/>'+dunes+'<path d="M130 401Q240 350 315 369Q450 315 545 345Q680 305 830 378" fill="none" stroke="'+accent+'" stroke-width="18" opacity=".42"/>'+path+trees+buildings+landmarkGroup+waterFeature+market+people+garden+boat+fireflies+rain+snow+regional';
+ return '<defs><linearGradient id="skygrad" x2="0" y2="1"><stop stop-color="'+sky+'"/><stop offset="1" stop-color="'+c[3][1]+'"/></linearGradient><linearGradient id="islandgrad" x2="0" y2="1"><stop stop-color="'+ground+'"/><stop offset="1" stop-color="'+(desert?"#9e774d":snowy?"#738f88":"#426d55")+'"/></linearGradient><linearGradient id="sea" x2="0" y2="1"><stop stop-color="#76c7bd"/><stop offset="1" stop-color="#14536e"/></linearGradient><linearGradient id="sunGlow"><stop stop-color="#fff5c8" stop-opacity=".65"/><stop offset="1" stop-color="#fff5c8" stop-opacity="0"/></linearGradient><filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#193b42" flood-opacity=".32"/></filter></defs><rect width="1000" height="620" fill="url(#skygrad)"/><circle cx="'+(time===3?780:820)+'" cy="105" r="'+(time===3?24:43)+'" fill="'+(time===3?"#fff0c4":"#fff2c1")+'" opacity=".94"/><circle cx="820" cy="105" r="105" fill="url(#sunGlow)"/>'+stars+cloud+farBirds+'<path d="M0 355Q150 245 300 330T600 295T1000 320V620H0Z" fill="#668e83" opacity=".48"/>'+ridges+'<path d="M0 410Q160 365 300 400T620 382T1000 405V620H0Z" fill="url(#sea)"/>'+waves+'<ellipse cx="500" cy="482" rx="405" ry="115" fill="#103f51" opacity=".25"/><path d="M75 405Q120 325 260 330Q360 275 475 300Q610 255 730 320Q860 310 925 402Q850 482 700 500H280Q130 480 75 405Z" fill="url(#islandgrad)" stroke="#d2dfb1" stroke-width="7"/>'+dunes+'<path d="M130 401Q240 350 315 369Q450 315 545 345Q680 305 830 378" fill="none" stroke="'+accent+'" stroke-width="18" opacity=".42"/>'+path+trees+buildings+landmarkGroup+regionalAccent+localLife+waterFeature+market+people+garden+boat+fireflies+rain+snow+regional';
 }
 function region(i){ri=(i+5)%5;render();$("#sceneWrap").classList.remove("zoom");toast("Destinasi: "+C[ci][4][ri][0])}
 function panel(title,html){$("#panelContent").innerHTML='<div class="panel-kicker">JELAJAH / '+title.toUpperCase()+'</div>'+html;$("#panel").classList.add("open");$("#overlay").classList.add("show")}
