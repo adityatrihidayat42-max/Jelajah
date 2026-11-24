@@ -648,6 +648,26 @@
   .atlas-three-canvas{z-index:2}
   .intro{z-index:4}
 }
+
+/* MOBILE REPAIR — readable hero and reliable touch targets */
+@media(max-width:850px){
+  .intro{pointer-events:auto;z-index:20;overflow-y:auto;overscroll-behavior:contain}
+  .hero-title{max-width:100%;width:100%;font-size:clamp(30px,8vw,37px);line-height:.98;letter-spacing:-1.25px;overflow-wrap:anywhere;word-break:normal}
+  .hero-title span{display:block!important;margin:2px 0 0!important;white-space:normal}
+  .hero-actions{position:relative;z-index:25;pointer-events:auto}
+  .hero-primary{position:relative;z-index:26;display:inline-flex;align-items:center;justify-content:space-between;max-width:100%;min-height:44px;padding:12px 16px;font-size:9px;white-space:normal;touch-action:manipulation;pointer-events:auto}
+  .atlas-three-canvas{touch-action:none;pointer-events:auto}
+}
+@media(max-width:390px){
+  .intro{max-height:236px;padding:12px 13px}
+  .hero-title{font-size:clamp(29px,7.8vw,33px);letter-spacing:-1px}
+  .hero-copy{font-size:8.5px;line-height:1.38}
+  .hero-primary{font-size:8px;padding:11px 13px}
+}
+@media(min-width:851px){
+  .hero-title{max-width:520px}
+}
+
 </style>
 </head>
 <body>
@@ -830,7 +850,7 @@ function action(a){$("#menu").classList.remove("open");if(a==="home"){close();$(
 $("#islands").innerHTML=C.map((c,i)=>'<button class="island island-style-'+(i%5)+'" data-i="'+i+'" aria-label="Jelajahi '+c[1]+'" style="left:'+[14,31,49,68,85,21,41,60,79,51][i]+'%;top:'+[36,23,39,25,40,67,70,68,68,54][i]+'%;--island:'+c[2]+';--island-accent:'+c[3][0]+'"><span class="island-visual"><i class="island-shadow"></i><i class="island-ground"></i><i class="island-hill"></i><i class="island-ridge"></i><i class="island-road"></i><i class="island-house"></i><i class="island-house second"></i><i class="island-tree"></i><i class="island-tree second"></i><i class="island-water"></i><i class="island-person"></i><i class="island-person second"></i><b class="island-flag">'+c[0]+'</b><i class="island-spark"></i></span><span class="island-name">'+c[1]+'</span></button>').join("");
 $("#islands").querySelectorAll("button").forEach(b=>b.onclick=()=>enter(+b.dataset.i));
 document.querySelectorAll("[data-menu]").forEach(b=>b.onclick=()=>action(b.dataset.menu));
-$("#exploreAll").onclick=countries;$("#hamb").onclick=()=>$("#menu").classList.toggle("open");$("#backHome").onclick=()=>action("home");$("#close").onclick=close;$("#overlay").onclick=close;$("#mapBtn").onclick=miniMap;$("#weatherBtn").onclick=weatherPanel;$("#photoBtn").onclick=photo;$("#favBtn").onclick=toggleFav;$("#timeBtn").onclick=()=>{time=(time+1)%4;render()};$("#sceneWrap").onclick=e=>{if(!e.target.closest("button"))$("#sceneWrap").classList.toggle("zoom")};
+window.jelajahOpenCountries=countries;$("#exploreAll").addEventListener("click",e=>{e.preventDefault();countries()});$("#hamb").onclick=()=>$("#menu").classList.toggle("open");$("#backHome").onclick=()=>action("home");$("#close").onclick=close;$("#overlay").onclick=close;$("#mapBtn").onclick=miniMap;$("#weatherBtn").onclick=weatherPanel;$("#photoBtn").onclick=photo;$("#favBtn").onclick=toggleFav;$("#timeBtn").onclick=()=>{time=(time+1)%4;render()};$("#sceneWrap").onclick=e=>{if(!e.target.closest("button"))$("#sceneWrap").classList.toggle("zoom")};
 $("#language").onclick=()=>{lang=lang==="id"?"en":"id";$("#language").textContent=lang==="id"?"ID / EN":"EN / ID";$("#landingSub").textContent=lang==="id"?"Jelajahi kepulauan miniatur, temukan tempat-tempat istimewa, dan ikuti cerita kecil yang tersembunyi di setiap sudut dunia.":"Explore miniature archipelagos, discover remarkable places, and follow little stories hidden in every corner of the world.";toast(lang==="id"?"Bahasa Indonesia":"English")};
 $("#sound").onclick=()=>{muted=!muted;$("#sound").textContent=muted?"♫ SOUND OFF":"♫ SOUND ON";toast(muted?"Suara dimatikan":"Suara belum tersedia pada versi ini")};
 let sx=0;$("#sceneWrap").addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});$("#sceneWrap").addEventListener("touchend",e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)region(ri+(dx<0?1:-1))},{passive:true});
