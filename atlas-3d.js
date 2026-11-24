@@ -18,9 +18,9 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
   document.documentElement.classList.add("has-three-atlas");
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x123e50, 0.026);
-  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-  camera.position.set(0, 10.5, 19.5);
+  scene.fog = new THREE.FogExp2(0x123e50, 0.018);
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 9.1, 17.6);
   camera.lookAt(0, 0.7, 0);
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -42,7 +42,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
   fill.position.set(8, 5, -7); scene.add(fill);
 
   const sea = new THREE.Mesh(
-    new THREE.CircleGeometry(10.8, 96),
+    new THREE.CircleGeometry(9.8, 96),
     new THREE.MeshStandardMaterial({ color: 0x17677a, roughness: 0.28, metalness: 0.12, transparent: true, opacity: 0.82 })
   );
   sea.rotation.x = -Math.PI / 2; sea.position.y = -0.82; sea.receiveShadow = true; scene.add(sea);
@@ -89,38 +89,82 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
     const cap=new THREE.Mesh(new THREE.ConeGeometry(.27,.42,8),mat(color));cap.position.y=1.55;cap.castShadow=true;g.add(cap);
     parent.add(g);
   }
+  function addLandmark(parent,index,p){
+    const accent=mat(p[2]),cream=mat(0xf0dcb8),dark=mat(0x76513b);
+    const box=(w,h,d,m,x,y,z)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;};
+    if(index===0){ // Indonesian temple gate
+      for(const x of [-.43,.43]){const pillar=box(.12,.8,.13,cream,x,.75,-.45);pillar.rotation.z=x*.13;}
+      box(1.25,.13,.22,mat(0x9b4938),0,1.2,-.45);
+      box(.98,.1,.2,mat(0xb85e43),0,1.34,-.45);
+    } else if(index===1){ // Japanese pagoda
+      for(let k=0;k<3;k++){const y=.55+k*.32;box(.48-k*.08,.25,.48-k*.08,cream,0,y,-.5);const roof=new THREE.Mesh(new THREE.ConeGeometry(.52-k*.07,.2,4),mat(0x9f5145));roof.position.set(0,y+.18,-.5);roof.rotation.y=Math.PI/4;roof.castShadow=true;parent.add(roof);}
+      const spire=new THREE.Mesh(new THREE.ConeGeometry(.07,.48,6),accent);spire.position.set(0,1.75,-.5);parent.add(spire);
+    } else if(index===2){ // Korean pavilion
+      box(.78,.13,.6,cream,0,.9,-.48);for(const x of [-.3,.3])box(.07,.65,.07,mat(0x9c5544),x,.57,-.48);
+      const roof=new THREE.Mesh(new THREE.ConeGeometry(.65,.32,4),mat(0x326b5c));roof.position.set(0,1.12,-.48);roof.rotation.y=Math.PI/4;parent.add(roof);
+    } else if(index===3){ // English clock tower
+      const tower=new THREE.Mesh(new THREE.BoxGeometry(.3,1.35,.3),cream);tower.position.set(0,1.05,-.5);tower.castShadow=true;parent.add(tower);
+      const roof=new THREE.Mesh(new THREE.ConeGeometry(.26,.38,4),mat(0x455a55));roof.position.set(0,1.9,-.5);roof.rotation.y=Math.PI/4;parent.add(roof);
+      const clock=new THREE.Mesh(new THREE.CircleGeometry(.1,16),windowMat);clock.position.set(0,1.35,-.335);parent.add(clock);
+    } else if(index===4){ // desert mosque minaret
+      const min=new THREE.Mesh(new THREE.CylinderGeometry(.12,.18,1.4,8),cream);min.position.set(0,1,-.48);min.castShadow=true;parent.add(min);
+      const dome=new THREE.Mesh(new THREE.SphereGeometry(.22,12,8),mat(0xb98551));dome.scale.y=1.2;dome.position.set(0,1.78,-.48);parent.add(dome);
+      const cres=new THREE.Mesh(new THREE.TorusGeometry(.09,.018,5,12),accent);cres.position.set(0,2.04,-.48);parent.add(cres);
+    } else if(index===5){ // alpine chalet
+      addHouse(parent,0,-.48,0x934f3e,1.15);
+      const snow=new THREE.Mesh(new THREE.ConeGeometry(.55,.24,4),cream);snow.position.set(0,1.25,-.48);snow.rotation.y=Math.PI/4;parent.add(snow);
+    } else if(index===6){ // Italian arched monument
+      const arch=new THREE.Mesh(new THREE.TorusGeometry(.34,.12,8,20,Math.PI),mat(0xd1b48b));arch.position.set(0,1,-.5);arch.rotation.z=Math.PI;parent.add(arch);
+      box(.2,.75,.18,cream,-.34,.42,-.5);box(.2,.75,.18,cream,.34,.42,-.5);
+    } else if(index===7){ // Paris landmark
+      const levels=[.42,.32,.22,.12];levels.forEach((w,k)=>{const bar=box(w,.1,.1,dark,0,.45+k*.34,-.5);});
+      const sp=new THREE.Mesh(new THREE.ConeGeometry(.07,.42,5),accent);sp.position.set(0,1.95,-.5);parent.add(sp);
+    } else if(index===8){ // pyramids
+      for(let k=0;k<2;k++){const py=new THREE.Mesh(new THREE.ConeGeometry(.55-k*.13,.8-k*.12,4),mat(k?0xd9bd87:0xc9a66f));py.position.set((k-.5)*.48,.82,-.48);py.rotation.y=Math.PI/4;py.scale.z=.85;py.castShadow=true;parent.add(py);}
+    } else { // Brazilian statue and palms
+      const plinth=new THREE.Mesh(new THREE.BoxGeometry(.34,.35,.34),cream);plinth.position.set(0,.55,-.5);parent.add(plinth);
+      const figure=new THREE.Mesh(new THREE.CapsuleGeometry(.09,.55,4,7),accent);figure.position.set(0,1.05,-.5);parent.add(figure);
+      const arms=box(.75,.07,.07,accent,0,1.22,-.5);
+    }
+  }
+
   function makeIsland(index){
     const p=palettes[index],g=new THREE.Group();
-    const base=new THREE.Mesh(new THREE.CylinderGeometry(1.42,1.08,.56,9,1,false),mat(0x345f65));
-    base.position.y=-.12;base.rotation.y=.18; base.castShadow=true;g.add(base);
-    const soil=new THREE.Mesh(new THREE.CylinderGeometry(1.36,1.26,.22,10),mat(p[1]));
-    soil.position.y=.2;soil.castShadow=true;soil.receiveShadow=true;g.add(soil);
-    const land=new THREE.Mesh(new THREE.CylinderGeometry(1.28,1.2,.28,10),mat(p[0]));
-    land.position.y=.4;land.castShadow=true;land.receiveShadow=true;g.add(land);
-    const hill=new THREE.Mesh(new THREE.IcosahedronGeometry(.74,1),mat(p[0]));
-    hill.position.set(-.15,.79,-.05);hill.scale.set(1.15,.63,.9);hill.castShadow=true;g.add(hill);
-    for(let j=0;j<5;j++){
-      const a=j*1.256+index*.63, radius=.72+(j%2)*.2;
-      addTree(g,Math.cos(a)*radius,.42+Math.sin(a)*radius,.72+(j%3)*.13,j+index);
+    // Irregular, hand-shaped coastline instead of identical round platforms.
+    const shape=new THREE.Shape();
+    const n=14, phase=index*.73;
+    for(let j=0;j<n;j++){
+      const a=j/n*Math.PI*2,rad=1.22+.15*Math.sin(j*2.31+phase)+.09*Math.cos(j*3.7+phase);
+      const x=Math.cos(a)*rad*1.12,z=Math.sin(a)*rad*.83;
+      if(j===0)shape.moveTo(x,z);else shape.lineTo(x,z);
     }
-    addHouse(g,.36,.18,p[2],.82);
-    addHouse(g,-.48,.43,p[2],.58);
-    if(index===0||index===3||index===6||index===8) addTower(g,-.1,-.48,p[2]);
-    if(index===1||index===2||index===5||index===7) {
-      const arch=new THREE.Mesh(new THREE.TorusGeometry(.28,.07,7,16,Math.PI),mat(p[2]));
-      arch.position.set(.7,.58,-.34);arch.rotation.z=Math.PI;arch.castShadow=true;g.add(arch);
-    }
-    const rock=new THREE.Mesh(new THREE.DodecahedronGeometry(.28,0),stone);rock.position.set(-.85,.53,-.3);rock.scale.y=1.3;rock.castShadow=true;g.add(rock);
-    const marker=new THREE.Mesh(new THREE.CylinderGeometry(1.48,1.42,.08,10),new THREE.MeshStandardMaterial({color:0xf0d39b,roughness:.48}));
-    marker.position.y=-.34;g.add(marker);
+    shape.closePath();
+    const landGeo=new THREE.ExtrudeGeometry(shape,{depth:.42,bevelEnabled:true,bevelSegments:2,steps:1,bevelSize:.07,bevelThickness:.07,curveSegments:5});
+    landGeo.rotateX(-Math.PI/2);
+    const landMat=mat(p[0]);const land=new THREE.Mesh(landGeo,landMat);land.position.y=.12;land.castShadow=true;land.receiveShadow=true;g.add(land);
+    const under=new THREE.Mesh(new THREE.CylinderGeometry(1.27,1.02,.48,12),mat(0x34545a));under.position.y=-.12;under.scale.set(1.08,.9,.82);under.castShadow=true;g.add(under);
+    // Varied terrain, not one oversized green dome.
+    const hillPositions=[[-.42,-.15,.48],[.32,-.35,.3],[-.12,.42,.22]];
+    hillPositions.forEach((v,k)=>{const h=new THREE.Mesh(new THREE.IcosahedronGeometry(v[2],1),mat(k===0?p[1]:p[0]));h.position.set(v[0],.46,v[1]);h.scale.set(1.35,.62,.92);h.castShadow=true;g.add(h);});
+    // Coastline rocks, garden patches and a winding path.
+    for(let k=0;k<7;k++){const a=k/7*Math.PI*2;const rock=new THREE.Mesh(new THREE.DodecahedronGeometry(.12+(k%3)*.025,0),stone);rock.position.set(Math.cos(a)*1.12,.22,Math.sin(a)*.78);rock.scale.y=.7;g.add(rock);}
+    const pathCurve=new THREE.CatmullRomCurve3([new THREE.Vector3(-.85,.35,.4),new THREE.Vector3(-.35,.36,.12),new THREE.Vector3(.1,.37,.34),new THREE.Vector3(.55,.36,.12)]);
+    const path=new THREE.Mesh(new THREE.TubeGeometry(pathCurve,24,.045,5,false),sand);g.add(path);
+    // Country-specific vegetation and architecture.
+    for(let j=0;j<4;j++){const a=j*1.7+index*.63;addTree(g,Math.cos(a)*(.75+(j%2)*.12),Math.sin(a)*.55,.62+(j%3)*.1,j+index);}
+    addHouse(g,.42,.24,p[2],.68);
+    addHouse(g,-.48,.28,p[2],.52);
+    addLandmark(g,index,p);
+    // A little waterfront dock and boat.
+    const dock=new THREE.Mesh(new THREE.BoxGeometry(.56,.08,.18),mat(0x9a704c));dock.position.set(.8,.13,.63);g.add(dock);
+    const buoy=new THREE.Mesh(new THREE.SphereGeometry(.09,8,6),mat(0xf0bd78));buoy.position.set(.98,.24,.64);g.add(buoy);
     g.userData.countryIndex=index;
     const angle=(index/10)*Math.PI*2-Math.PI/2;
-    const radius=index%2===0?6.0:7.25;
-    g.position.set(Math.cos(angle)*radius,Math.sin(index*1.7)*.28,Math.sin(angle)*radius*.68);
+    const radius=index%2===0?5.45:6.55;
+    g.position.set(Math.cos(angle)*radius,Math.sin(index*1.7)*.18,Math.sin(angle)*radius*.63);
     g.rotation.y=-angle*.25;
-    const s=.82+(index%3)*.1;g.scale.setScalar(s);
-    world.add(g);islandGroups.push(g);clickable.push(g);
-    return g;
+    const scale=.94+(index%3)*.07;g.scale.setScalar(scale);
+    world.add(g);islandGroups.push(g);clickable.push(g);return g;
   }
   for(let i=0;i<10;i++)makeIsland(i);
 
