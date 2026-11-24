@@ -480,14 +480,60 @@
 @keyframes lifeDrift{from{translate:-3px 0}to{translate:5px -2px}}
 @media(prefers-reduced-motion:reduce){#art .signature,#art .local-life{animation:none!important}}
 
+
+/* ==========================================================
+   JELAJAH — FINAL ATLAS EXPERIENCE PASS
+   Clearer hierarchy, living travel routes, and country browser
+   ========================================================== */
+.hero-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:19px}
+.hero-primary{display:inline-flex;align-items:center;gap:24px;padding:13px 17px;border:1px solid #f4d6a0;border-radius:4px 13px 4px 13px;background:linear-gradient(135deg,#f1d39e,#c99a63);color:#183c45;font-size:9px;font-weight:900;letter-spacing:1.25px;box-shadow:0 9px 24px #041d2d55,inset 0 1px #fff9;transition:transform .25s,box-shadow .25s}
+.hero-primary span{font-size:16px;line-height:10px}.hero-primary:hover{transform:translateY(-3px);box-shadow:0 15px 30px #041d2d77}
+.hero-note{font-size:7px;letter-spacing:1.3px;color:#c4d9d0}
+.atlas-routes{position:absolute;z-index:2;inset:5% 3%;width:94%;height:88%;overflow:visible;pointer-events:none;opacity:.62;filter:drop-shadow(0 0 5px #f6d8a055)}
+.route-line{fill:none;stroke:url(#routeGlow);stroke-width:2;stroke-dasharray:3 13;stroke-linecap:round;animation:routeTravel 22s linear infinite}
+.route-two{animation-duration:28s;animation-direction:reverse;opacity:.6}.route-three{animation-duration:18s;opacity:.45}
+.atlas-boat{position:absolute;z-index:3;width:39px;height:25px;pointer-events:none;filter:drop-shadow(0 5px 5px #082d3e66);animation:boatDrift 8s ease-in-out infinite}
+.atlas-boat:before{content:"";position:absolute;left:2px;bottom:0;width:34px;height:9px;background:linear-gradient(180deg,#d6a875,#835b45);clip-path:polygon(0 0,100% 0,82% 100%,20% 100%);border-radius:0 0 8px 8px}
+.atlas-boat i{position:absolute;left:18px;bottom:8px;width:2px;height:22px;background:#f0d9ae}
+.atlas-boat b{position:absolute;left:20px;bottom:11px;width:15px;height:17px;background:#f4e8cb;clip-path:polygon(0 0,100% 80%,0 100%)}
+.boat-one{left:28%;top:57%}.boat-two{right:21%;top:68%;scale:.72;animation-delay:-4s}
+.atlas-plane{position:absolute;z-index:3;left:48%;top:27%;color:#f4dfb8;font-size:17px;text-shadow:0 0 13px #f5d8a0;animation:planeRoute 17s ease-in-out infinite;pointer-events:none}
+@keyframes routeTravel{to{stroke-dashoffset:-320}}
+@keyframes boatDrift{0%,100%{translate:-4px 0;rotate:-3deg}50%{translate:8px -5px;rotate:3deg}}
+@keyframes planeRoute{0%{translate:-60px 25px;rotate:-12deg;opacity:0}12%,78%{opacity:.9}50%{translate:140px -30px;rotate:8deg}100%{translate:260px 35px;rotate:18deg;opacity:0}}
+.country-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.country-tile{position:relative;display:flex;align-items:center;gap:11px;min-height:70px;padding:11px;border:1px solid #ffffff20;border-radius:13px;background:linear-gradient(135deg,#ffffff10,#ffffff05);text-align:left;transition:transform .2s,border-color .2s,background .2s;overflow:hidden}
+.country-tile:after{content:"";position:absolute;width:70px;height:70px;right:-25px;bottom:-36px;border-radius:50%;background:var(--country-color);opacity:.18;filter:blur(3px)}
+.country-tile:hover{transform:translateY(-3px);border-color:#f1d29b88;background:#ffffff16}
+.country-flag{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(145deg,var(--country-color),#ffffff24);font-size:20px;box-shadow:inset 0 1px #fff6}
+.country-tile strong{display:block;font-size:11px;color:#f4eee0}.country-tile small{display:block;margin-top:4px;font-size:8px;letter-spacing:1px;color:#b5c9c2}
+.country-tile em{position:absolute;right:10px;top:9px;font-style:normal;font-size:8px;color:#e8c995}
+.country-search{width:100%;margin-top:17px;padding:13px 14px;border:1px solid #ffffff2a;border-radius:11px;background:#ffffff0b;color:#f7f0df;outline:none;font-size:12px}
+.country-search:focus{border-color:#e9c48b;box-shadow:0 0 0 3px #e9c48b1a}
+.country-empty{grid-column:1/-1;padding:20px;text-align:center;color:#c2d2ca;font-size:12px}
+.panel-intro{font-size:12px;line-height:1.7;color:#bdcec6;margin:0}
+@media(max-width:850px){
+ .hero-actions{gap:8px;margin-top:12px}.hero-primary{padding:11px 13px;font-size:8px;gap:14px}.hero-note{font-size:6px}
+ .atlas-routes{inset:7% -3% 8%;width:106%;height:82%}
+ .atlas-boat{scale:.78}.atlas-plane{font-size:13px}
+}
+@media(max-width:600px){
+ .hero-actions{margin-top:9px}.hero-primary{padding:9px 11px;font-size:7px;gap:10px}.hero-note{display:none}
+ .atlas-routes{opacity:.42}.atlas-boat{scale:.62}.atlas-plane{font-size:11px}
+ .country-grid{gap:7px}.country-tile{min-height:62px;padding:8px;gap:8px}.country-flag{width:32px;height:32px;flex-basis:32px;font-size:17px}.country-tile strong{font-size:10px}.country-tile small{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){.route-line,.atlas-boat,.atlas-plane{animation:none!important}}
+
 </style>
 </head>
 <body>
 <main id="app">
 <header class="site-header"><div class="brand"><span class="brand-mark">✦</span> JELAJAH <span style="opacity:.55;font-weight:500;letter-spacing:1px">/ MINIATURE WORLDS</span></div><div class="header-right"><button class="header-btn" id="language">ID / EN</button><button class="header-btn" id="sound">♫ SOUND OFF</button><button class="header-btn" id="hamb">MENU</button></div></header>
 <section id="landing">
-<div class="intro"><div class="overline">ATLAS DUNIA MINIATUR</div><h1 class="hero-title">Dunia kecil,<span>petualangan besar.</span></h1><p class="hero-copy" id="landingSub">Jelajahi kepulauan miniatur, temukan tempat-tempat istimewa, dan ikuti cerita kecil yang tersembunyi di setiap sudut dunia.</p><div class="intro-meta"><div class="meta-item"><strong>10</strong><small>NEGARA</small></div><div class="meta-item"><strong>50</strong><small>DESTINASI</small></div><div class="meta-item"><strong>∞</strong><small>CERITA</small></div></div><div class="start-hint"><span class="hint-dot"></span> SENTUH SALAH SATU PULAU UNTUK MENJELAJAH</div></div>
+<div class="intro"><div class="overline">ATLAS DUNIA MINIATUR</div><h1 class="hero-title">Dunia kecil,<span>petualangan besar.</span></h1><p class="hero-copy" id="landingSub">Jelajahi kepulauan miniatur, temukan tempat-tempat istimewa, dan ikuti cerita kecil yang tersembunyi di setiap sudut dunia.</p><div class="intro-meta"><div class="meta-item"><strong>10</strong><small>NEGARA</small></div><div class="meta-item"><strong>50</strong><small>DESTINASI</small></div><div class="meta-item"><strong>∞</strong><small>CERITA</small></div></div><div class="start-hint"><span class="hint-dot"></span> SENTUH SALAH SATU PULAU UNTUK MENJELAJAH</div><div class="hero-actions"><button class="hero-primary" id="exploreAll">JELAJAHI SEMUA NEGARA <span>↗</span></button><span class="hero-note">TANPA BATAS · BEBAS MENJELAJAH</span></div></div>
 <div class="atlas"><div class="atlas-halo"></div><div class="atlas-ocean"></div>
+<svg class="atlas-routes" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="routeGlow"><stop stop-color="#f5d7a0" stop-opacity="0"/><stop offset=".5" stop-color="#f5d7a0" stop-opacity=".9"/><stop offset="1" stop-color="#f5d7a0" stop-opacity="0"/></linearGradient></defs><path class="route-line route-one" d="M110 280Q280 80 470 240T850 300"/><path class="route-line route-two" d="M170 480Q390 610 570 390T870 480"/><path class="route-line route-three" d="M280 160Q450 300 700 150"/></svg>
+<div class="atlas-boat boat-one"><i></i><b></b></div><div class="atlas-boat boat-two"><i></i><b></b></div><div class="atlas-plane">✈</div>
 <div class="atlas-orbit orbit-a"></div><div class="atlas-orbit orbit-b"></div>
 <div class="atlas-cloud cloud-a"><i></i><i></i><i></i></div><div class="atlas-cloud cloud-b"><i></i><i></i><i></i></div><div class="atlas-cloud cloud-c"><i></i><i></i><i></i></div>
 <div class="atlas-compass"><span>N</span><b>✦</b><small>S</small></div>
@@ -497,7 +543,7 @@
 <div class="atlas-label">10 NEGARA · 50 DESTINASI · SATU DUNIA UNTUK DIJELAJAHI</div></div>
 </section>
 <section id="world" class="hidden"><div class="world-sky" id="sky"></div><div class="world-top"><button class="back-btn" id="backHome">← SEMUA NEGARA</button><div class="world-brand">JELAJAH · FIELD JOURNAL</div></div><div class="world-title"><div class="eyebrow" id="eyebrow">INDONESIA · 01 / 05</div><h1 id="title">BALI</h1><p id="desc">Pulau dewata, budaya, dan lanskap tropis.</p></div><div class="scene-wrap" id="sceneWrap"><svg id="art" viewBox="0 0 1000 620" role="img" aria-label="Lanskap miniatur"></svg></div><div class="scene-tools"><button class="scene-tool" id="mapBtn">⌖ MINI MAP</button><button class="scene-tool" id="weatherBtn">☀ CUACA</button><button class="scene-tool" id="timeBtn">◷ PAGI</button><button class="scene-tool" id="photoBtn">◎ FOTO</button><button class="scene-tool" id="favBtn">♡ FAVORIT</button></div><div class="destination-bar"><div class="destination-info"><small>NOW EXPLORING</small><strong id="destinationName">Bali</strong></div><div class="region-rail" id="regions"></div></div></section>
-<div class="menu" id="menu"><button data-menu="about">ABOUT JELAJAH</button><button data-menu="passport">DIGITAL PASSPORT</button><button data-menu="favorites">SAVED PLACES</button></div>
+<div class="menu" id="menu"><button data-menu="countries">EXPLORE ALL COUNTRIES</button><button data-menu="about">ABOUT JELAJAH</button><button data-menu="passport">DIGITAL PASSPORT</button><button data-menu="favorites">SAVED PLACES</button></div>
 <div class="overlay" id="overlay"></div><aside class="panel" id="panel"><div class="panel-head"><div class="brand"><span class="brand-mark">✦</span> JELAJAH</div><button class="close" id="close">×</button></div><div id="panelContent"></div></aside><div class="toast" id="toast"></div>
 </main>
 <script>
@@ -641,6 +687,14 @@ function scene(r,c){
 function region(i){ri=(i+5)%5;render();$("#sceneWrap").classList.remove("zoom");toast("Destinasi: "+C[ci][4][ri][0])}
 function panel(title,html){$("#panelContent").innerHTML='<div class="panel-kicker">JELAJAH / '+title.toUpperCase()+'</div>'+html;$("#panel").classList.add("open");$("#overlay").classList.add("show")}
 function close(){$("#panel").classList.remove("open");$("#overlay").classList.remove("show")}
+function countries(){
+ const tiles=()=>C.map((c,i)=>'<button class="country-tile" data-country="'+i+'" style="--country-color:'+c[2]+'"><span class="country-flag">'+c[0]+'</span><span><strong>'+c[1]+'</strong><small>05 DESTINASI · '+(visited.includes(i)?"SUDAH DIKUNJUNGI":"BELUM DIJELAJAH")+'</small></span><em>'+String(i+1).padStart(2,"0")+'</em></button>').join("");
+ panel("Explore countries",'<h2>Choose your next world.</h2><p class="panel-intro">Sepuluh negara, lima puluh destinasi, dan banyak cerita kecil menunggumu. Pilih satu pulau untuk memulai perjalanan.</p><input class="country-search" id="countrySearch" type="search" placeholder="Cari negara..."><div class="country-grid" id="countryGrid">'+tiles()+'</div>');
+ const grid=$("#countryGrid"),search=$("#countrySearch");
+ function bind(){grid.querySelectorAll("[data-country]").forEach(b=>b.onclick=()=>{const i=+b.dataset.country;close();enter(i)})}
+ bind();
+ search.oninput=()=>{const q=search.value.toLocaleLowerCase();const matches=C.map((c,i)=>({c,i})).filter(x=>x.c[1].toLocaleLowerCase().includes(q));grid.innerHTML=matches.map(({c,i})=>'<button class="country-tile" data-country="'+i+'" style="--country-color:'+c[2]+'"><span class="country-flag">'+c[0]+'</span><span><strong>'+c[1]+'</strong><small>05 DESTINASI · '+(visited.includes(i)?"SUDAH DIKUNJUNGI":"BELUM DIJELAJAH")+'</small></span><em>'+String(i+1).padStart(2,"0")+'</em></button>').join("")||'<div class="country-empty">Negara tidak ditemukan. Coba kata kunci lain.</div>';bind()}
+}
 function about(){panel("About Jelajah",'<h2>Small worlds. Big wonders.</h2><p>Jelajah adalah atlas interaktif yang mengajakmu berkeliling dunia melalui lanskap miniatur, landmark, dan cerita budaya dari berbagai tempat.</p><div class="fact"><b>10 NEGARA · 50 DESTINASI</b><p>Lima wilayah pilihan di setiap negara, dirancang sebagai perjalanan yang bisa dijelajahi bebas.</p></div><div class="fact"><b>YOUR OWN JOURNEY</b><p>Paspor, tempat favorit, dan kenangan tersimpan secara lokal di browser perangkat ini.</p></div>')}
 function passport(){let s=C.map((c,i)=>'<div class="stamp '+(visited.includes(i)?"done":"")+'"><span>'+(visited.includes(i)?"✦":c[0])+'</span>'+c[1]+'</div>').join("");panel("Digital Passport",'<h2>Paspor perjalanan</h2><p>'+visited.length+' dari 10 negara sudah kamu kunjungi.</p><div class="stampgrid">'+s+'</div><div class="fact"><b>CATATAN</b><p>Progres disimpan di browser perangkat ini. Menghapus data browser dapat menghapus progres.</p></div>')}
 function favorites(){let list=favs.map(k=>{let a=k.split("-").map(Number);return '<button class="secondary" data-fav="'+k+'" style="display:block;margin:8px 0;width:100%;text-align:left">'+C[a[0]][0]+' '+C[a[0]][1]+' — '+C[a[0]][4][a[1]][0]+'</button>'}).join("");panel("Saved places",'<h2>Tempat favorit</h2><p>Destinasi yang ingin kamu kunjungi lagi.</p>'+(list||"<p>Belum ada tempat tersimpan. Tekan tombol favorit saat menjelajahi destinasi.</p>"));$("#panelContent").querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{let a=b.dataset.fav.split("-").map(Number);ci=a[0];ri=a[1];$("#landing").classList.add("hide");$("#world").classList.remove("hidden");render();close()})}
@@ -648,11 +702,11 @@ function miniMap(){let list=C[ci][4].map((r,i)=>'<button class="secondary" data-
 function weatherPanel(){panel("Weather",'<h2>Ubah suasana</h2><p>Atur cuaca dan lihat lanskap miniatur berubah.</p><div class="weather-opts">'+[["sun","☀ Cerah"],["rain","☂ Hujan"],["snow","❄ Salju"],["fog","☁ Kabut"]].map(x=>'<button data-weather="'+x[0]+'" class="'+(weather===x[0]?"active":"")+'">'+x[1]+'</button>').join("")+'</div>');$("#panelContent").querySelectorAll("[data-weather]").forEach(b=>b.onclick=()=>{weather=b.dataset.weather;render();weatherPanel()})}
 function photo(){let s=$("#art").cloneNode(true);s.setAttribute("xmlns","http://www.w3.org/2000/svg");let blob=new Blob([new XMLSerializer().serializeToString(s)],{type:"image/svg+xml"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="jelajah-"+C[ci][1].toLowerCase()+"-"+C[ci][4][ri][0].toLowerCase().replace(/\s+/g,"-")+".svg";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Ilustrasi disimpan")}
 function toggleFav(){let k=ci+"-"+ri;favs=favs.includes(k)?favs.filter(x=>x!==k):favs.concat(k);localStorage.setItem("jelajahFavs",JSON.stringify(favs));render();toast(favs.includes(k)?"Ditambahkan ke favorit":"Dihapus dari favorit")}
-function action(a){$("#menu").classList.remove("open");if(a==="home"){close();$("#landing").classList.remove("hide");$("#world").classList.add("hidden")}if(a==="about")about();if(a==="passport")passport();if(a==="favorites")favorites()}
+function action(a){$("#menu").classList.remove("open");if(a==="home"){close();$("#landing").classList.remove("hide");$("#world").classList.add("hidden")}if(a==="countries")countries();if(a==="about")about();if(a==="passport")passport();if(a==="favorites")favorites()}
 $("#islands").innerHTML=C.map((c,i)=>'<button class="island island-style-'+(i%5)+'" data-i="'+i+'" aria-label="Jelajahi '+c[1]+'" style="left:'+[14,31,49,68,85,21,41,60,79,51][i]+'%;top:'+[36,23,39,25,40,67,70,68,68,54][i]+'%;--island:'+c[2]+';--island-accent:'+c[3][0]+'"><span class="island-visual"><i class="island-shadow"></i><i class="island-ground"></i><i class="island-hill"></i><i class="island-ridge"></i><i class="island-road"></i><i class="island-house"></i><i class="island-house second"></i><i class="island-tree"></i><i class="island-tree second"></i><i class="island-water"></i><i class="island-person"></i><i class="island-person second"></i><b class="island-flag">'+c[0]+'</b><i class="island-spark"></i></span><span class="island-name">'+c[1]+'</span></button>').join("");
 $("#islands").querySelectorAll("button").forEach(b=>b.onclick=()=>enter(+b.dataset.i));
 document.querySelectorAll("[data-menu]").forEach(b=>b.onclick=()=>action(b.dataset.menu));
-$("#hamb").onclick=()=>$("#menu").classList.toggle("open");$("#backHome").onclick=()=>action("home");$("#close").onclick=close;$("#overlay").onclick=close;$("#mapBtn").onclick=miniMap;$("#weatherBtn").onclick=weatherPanel;$("#photoBtn").onclick=photo;$("#favBtn").onclick=toggleFav;$("#timeBtn").onclick=()=>{time=(time+1)%4;render()};$("#sceneWrap").onclick=e=>{if(!e.target.closest("button"))$("#sceneWrap").classList.toggle("zoom")};
+$("#exploreAll").onclick=countries;$("#hamb").onclick=()=>$("#menu").classList.toggle("open");$("#backHome").onclick=()=>action("home");$("#close").onclick=close;$("#overlay").onclick=close;$("#mapBtn").onclick=miniMap;$("#weatherBtn").onclick=weatherPanel;$("#photoBtn").onclick=photo;$("#favBtn").onclick=toggleFav;$("#timeBtn").onclick=()=>{time=(time+1)%4;render()};$("#sceneWrap").onclick=e=>{if(!e.target.closest("button"))$("#sceneWrap").classList.toggle("zoom")};
 $("#language").onclick=()=>{lang=lang==="id"?"en":"id";$("#language").textContent=lang==="id"?"ID / EN":"EN / ID";$("#landingSub").textContent=lang==="id"?"Jelajahi kepulauan miniatur, temukan tempat-tempat istimewa, dan ikuti cerita kecil yang tersembunyi di setiap sudut dunia.":"Explore miniature archipelagos, discover remarkable places, and follow little stories hidden in every corner of the world.";toast(lang==="id"?"Bahasa Indonesia":"English")};
 $("#sound").onclick=()=>{muted=!muted;$("#sound").textContent=muted?"♫ SOUND OFF":"♫ SOUND ON";toast(muted?"Suara dimatikan":"Suara belum tersedia pada versi ini")};
 let sx=0;$("#sceneWrap").addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});$("#sceneWrap").addEventListener("touchend",e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)region(ri+(dx<0?1:-1))},{passive:true});
