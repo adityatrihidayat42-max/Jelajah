@@ -19,9 +19,9 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x123e50, 0.018);
-  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 9.1, 17.6);
-  camera.lookAt(0, 0.7, 0);
+  const camera = new THREE.PerspectiveCamera(37, 1, 0.1, 100);
+  camera.position.set(0, 7.8, 15.2);
+  camera.lookAt(0, 0.45, 0);
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -160,13 +160,13 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
     const buoy=new THREE.Mesh(new THREE.SphereGeometry(.09,8,6),mat(0xf0bd78));buoy.position.set(.98,.24,.64);g.add(buoy);
     g.userData.countryIndex=index;
     // Generous invisible touch target: easier to select a small island on phones.
-    const touchTarget=new THREE.Mesh(new THREE.CylinderGeometry(1.42,1.42,1.45,20),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,colorWrite:false}));
-    touchTarget.position.y=.68;touchTarget.userData.countryIndex=index;g.add(touchTarget);
+    const touchTarget=new THREE.Mesh(new THREE.CylinderGeometry(1.85,1.85,2.1,24),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,colorWrite:false}));
+    touchTarget.position.y=.72;touchTarget.userData.countryIndex=index;g.add(touchTarget);
     const angle=(index/10)*Math.PI*2-Math.PI/2;
-    const radius=index%2===0?5.45:6.55;
+    const radius=index%2===0?4.55:5.35;
     g.position.set(Math.cos(angle)*radius,Math.sin(index*1.7)*.18,Math.sin(angle)*radius*.63);
     g.rotation.y=-angle*.25;
-    const scale=.94+(index%3)*.07;g.scale.setScalar(scale);
+    const scale=1.16+(index%3)*.055;g.scale.setScalar(scale);
     world.add(g);islandGroups.push(g);clickable.push(g);return g;
   }
   for(let i=0;i<10;i++)makeIsland(i);
@@ -203,16 +203,35 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
 
   const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let downX=0,downY=0,dragging=false,dragged=false,targetRotation=0,zoom=1,selected=-1;
-  const pickables=[];
-  islandGroups.forEach(g=>g.traverse(o=>{if(o.isMesh){o.userData.countryIndex=g.userData.countryIndex;pickables.push(o)}}));
-  canvas.addEventListener("pointerdown",e=>{downX=e.clientX;downY=e.clientY;dragging=true;dragged=false;canvas.setPointerCapture?.(e.pointerId)});
-  canvas.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-downX,dy=e.clientY-downY;if(Math.abs(dx)+Math.abs(dy)>5)dragged=true;targetRotation+=dx*.004;world.rotation.y=targetRotation;camera.position.y=THREE.MathUtils.clamp(camera.position.y-dy*.012,7.5,14);camera.lookAt(0,.4,0);downX=e.clientX;downY=e.clientY});
-  canvas.addEventListener("pointerup",e=>{
-    dragging=false;if(dragged)return;
-    const rect=canvas.getBoundingClientRect();pointer.x=((e.clientX-rect.left)/rect.width)*2-1;pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
-    raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(pickables,false)[0];
-    if(hit){const idx=hit.object.userData.countryIndex;selected=idx;document.querySelector('#islands .island[data-i="'+idx+'"]')?.click();}
-  });
+  const selectIsland=(idx)=>{
+    if(!Number.isInteger(idx)||idx<0||idx>=islandGroups.length)return;
+    selected=idx;
+    const button=document.querySelector('#islands .island[data-i="'+idx+'"]');
+    if(button){button.click();return;}
+    window.dispatchEvent(new CustomEvent("jelajah:select-country",{detail:{index:idx}}));
+  };
+  canvas.addEventListener("pointerdown",e=>{downX=e.clientX;downY=e.clientY;dragging=true;dragged=false;try{canvas.setPointerCapture(e.pointerId)}catch(_){}});
+  canvas.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-downX,dy=e.clientY-downY;if(Math.abs(dx)+Math.abs(dy)>7)dragged=true;targetRotation+=dx*.004;world.rotation.y=targetRotation;camera.position.y=THREE.MathUtils.clamp(camera.position.y-dy*.012,6.8,12);camera.lookAt(0,.4,0);downX=e.clientX;downY=e.clientY});
+  const pickAt=(e)=>{
+    const rect=canvas.getBoundingClientRect();
+    pointer.x=((e.clientX-rect.left)/rect.width)*2-1;
+    pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
+    raycaster.setFromCamera(pointer,camera);
+    const hit=raycaster.intersectObjects(islandGroups,true).find(h=>h.object.userData.countryIndex!==undefined);
+    if(hit){selectIsland(hit.object.userData.countryIndex);return;}
+    // Touch-friendly fallback: choose the nearest visible island center.
+    let nearest=-1,best=Infinity;
+    islandGroups.forEach((g,i)=>{
+      const p=g.getWorldPosition(new THREE.Vector3()).project(camera);
+      const sx=rect.left+(p.x+1)*.5*rect.width,sy=rect.top+(-p.y+1)*.5*rect.height;
+      const d=Math.hypot(sx-e.clientX,sy-e.clientY);
+      if(d<best){best=d;nearest=i;}
+    });
+    if(nearest>=0&&best<Math.max(58,rect.width*.14))selectIsland(nearest);
+  };
+  canvas.addEventListener("pointerup",e=>{dragging=false;if(!dragged)pickAt(e)});
+  canvas.addEventListener("click",e=>{if(!dragged)pickAt(e)});
+
   canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=THREE.MathUtils.clamp(zoom+(e.deltaY>0?-.08:.08),.78,1.25);camera.position.multiplyScalar(zoom);},{passive:false});
   canvas.addEventListener("pointercancel",()=>dragging=false);
 
