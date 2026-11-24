@@ -63,6 +63,68 @@
 @media(max-width:600px){#app{min-height:500px}.site-header{height:60px;padding:0 15px}.brand{font-size:10px;letter-spacing:2px}.brand-mark{width:29px;height:29px}.header-btn{font-size:9px;padding:8px 10px}.hero-title{font-size:56px;letter-spacing:-2px}.overline{font-size:8px;letter-spacing:2px}.hero-copy{max-width:340px;font-size:11px}.atlas{height:42vh;min-height:300px}.atlas-ocean{width:112vw;height:62vw;max-height:300px}.island{width:70px;gap:4px}.island-visual{height:53px}.island-ground{height:24px;border-width:2px}.island-hill{bottom:23px;width:28px;height:24px}.island-house{bottom:23px;transform:scale(.7)}.island-tree{bottom:22px;transform:scale(.7)}.island-flag{font-size:12px}.island-name{font-size:7px;letter-spacing:0;padding:3px 6px}.world-top{padding:12px 13px}.back-btn{padding:8px 11px;font-size:9px}.world-brand{font-size:8px}.world-title{top:13%;left:17px;max-width:70%}.world-title .eyebrow{font-size:8px;margin-bottom:7px}.world-title h1{font-size:clamp(42px,12vw,66px);letter-spacing:-1.5px;margin-bottom:8px}.world-title p{font-size:10px;line-height:1.5;max-width:230px}.scene-wrap{inset:23% -20% 16%}.scene-tools{top:13%;right:12px;gap:6px}.scene-tool{font-size:8px;padding:8px 10px}.destination-bar{left:10px;right:10px;bottom:9px;display:block}.destination-info{display:none}.region-rail{max-width:100%;gap:6px;padding:8px 3px 11px}.region-card{flex-basis:94px;padding:7px;border-radius:11px}.region-art{height:29px;font-size:17px;margin-bottom:5px}.region-card b{font-size:9px}.region-card small{font-size:7px}.panel{width:94vw;padding:20px 18px}.panel h2{font-size:27px}}
 @media(max-height:700px) and (min-width:851px){#landing{padding-top:75px}.atlas{height:68vh;min-height:420px}.hero-title{font-size:clamp(54px,7vw,88px)}.world-title{top:14%}.scene-wrap{inset:7% 0 5%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* IMMERSIVE MINIATURE ARCHIPELAGO — FULL VISUAL REBUILD */
+#landing{display:block;padding:0;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 45%,#75c2ad 0%,#367f83 34%,#174d64 68%,#0a293e 100%)}
+#landing:before{opacity:.14;background-size:25px 25px;mask-image:radial-gradient(ellipse,black,transparent 78%)}
+#landing:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#08283a99,transparent 24%,transparent 65%,#08283acc),radial-gradient(ellipse at 50% 48%,transparent 35%,#08283a55)}
+.site-header{height:76px;padding:0 clamp(18px,4vw,64px);background:linear-gradient(180deg,#08283acc,transparent);border:0}
+.brand-mark{border-radius:50%;width:38px;height:38px;box-shadow:0 0 0 5px #f4d6a022,0 8px 25px #071c2b88}
+.header-btn{background:#0b304b99;border-color:#d6f2e555;box-shadow:0 8px 24px #06253744}
+.intro{position:absolute;z-index:6;left:clamp(22px,6vw,90px);bottom:clamp(28px,6vh,70px);max-width:465px;padding:22px 26px;border:1px solid #e6f4df44;border-radius:24px;background:linear-gradient(135deg,#0a3048d9,#123f4bb0);backdrop-filter:blur(18px);box-shadow:0 22px 70px #061f3070}
+.hero-title{font-size:clamp(48px,6.2vw,86px);line-height:.88;margin:17px 0 13px;text-shadow:0 8px 30px #061e2d66}
+.hero-copy{font-size:12px;line-height:1.65;max-width:355px;margin-bottom:15px}
+.intro-meta{padding-top:12px;gap:25px}.meta-item strong{font-size:22px}.start-hint{margin-top:15px;font-size:9px}
+.atlas{position:absolute;z-index:2;inset:0;width:100%;height:100%;min-height:0;pointer-events:none}
+.atlas-halo{width:min(90vw,1100px);border:1px solid #e1fff02a;box-shadow:0 0 100px #a6e5c51c,inset 0 0 80px #c8ffe80a}
+.atlas-ocean{width:min(83vw,1120px);height:min(54vw,690px);max-height:78vh;transform:rotateX(59deg) rotate(-8deg);background:radial-gradient(ellipse at 48% 38%,#8ad2b5 0%,#4ca9a2 24%,#247c8c 53%,#15536e 78%,#0c3b59 100%);border:3px solid #c5f2d477;box-shadow:inset 0 22px 55px #e2fff077,inset 0 -65px 75px #082e4d99,0 65px 75px #061b2c99,0 0 0 15px #a4e6d00b}
+.atlas-ocean:before{inset:8%;border:2px dashed #d6fff055;box-shadow:0 0 35px #d6fff022}
+.atlas-ocean:after{inset:22% 4%;border:2px solid #d6fff033}
+.atlas-label{bottom:4%;font-size:9px;letter-spacing:4px;text-shadow:0 2px 12px #08293a}
+#islands{position:absolute;inset:0;pointer-events:none}
+.island{pointer-events:auto;width:clamp(105px,12vw,158px);gap:9px;filter:drop-shadow(0 22px 13px #062538aa);animation:drift 6s ease-in-out infinite}
+.island-visual{height:112px;filter:drop-shadow(0 4px 0 #194a59)}
+.island-ground{left:1%;right:1%;bottom:11px;height:52px;border:4px solid #d7e7b9;border-radius:48% 52% 40% 46%;background:linear-gradient(160deg,#b7d58b 0%,var(--island) 30%,#578a69 66%,#326b64 100%);box-shadow:inset -15px -13px 0 #174d4c44,inset 8px 7px 0 #f4edbd66,0 12px 0 #17485c,0 19px 22px #061b2c99;transform:rotate(-8deg)}
+.island-hill{bottom:54px;left:22%;width:62px;height:48px;background:linear-gradient(140deg,#d6e6a5,#76a96d 58%,#4f8465);filter:drop-shadow(0 3px 0 #4a7559)}
+.island-house{bottom:54px;left:49%;width:27px;height:23px;background:linear-gradient(90deg,#f5e4b7,#d9ae7e);border:2px solid #fff0d5;box-shadow:0 4px #98684c,inset 4px 0 #ffffff55}
+.island-house:before{left:-7px;top:-14px;width:37px;height:18px;background:linear-gradient(135deg,#c97957,#8e4e48);filter:drop-shadow(0 3px 0 #704c42)}
+.island-tree{bottom:51px;right:18%;width:8px;height:24px;background:#76523b}
+.island-tree:before{left:-10px;top:-19px;width:28px;height:29px;background:#4d885c;box-shadow:9px 4px #85b878,-5px 7px #6aa36b}
+.island-flag{top:-2px;right:2px;font-size:22px}
+.island-name{font-size:10px;padding:7px 13px;background:#092d42df;border:1px solid #d8f4e477;box-shadow:0 8px 22px #061f3077}
+.world-sky{background:linear-gradient(180deg,#78bfc0 0%,#d5d6b4 56%,#d4b68b 100%)}
+.world-sky:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 76% 18%,#fff7d5aa 0 4%,transparent 19%),linear-gradient(180deg,transparent 58%,#1a536033)}
+.world-title{top:14%;max-width:38%;padding:22px 24px;border:1px solid #ffffff55;border-radius:22px;background:#153d4b55;backdrop-filter:blur(12px);box-shadow:0 18px 45px #143c4c22}
+.world-title h1{font-size:clamp(52px,7vw,96px)}
+.scene-wrap{inset:7% -4% 2%;transform:scale(1.04);filter:drop-shadow(0 30px 35px #0b344955)}
+.scene-tool{background:#10394fdd;border-color:#e2f5e877;box-shadow:0 10px 25px #092d3d55}
+.destination-info,.region-card{background:#0e344ad9;border-color:#e1f2df77;box-shadow:0 12px 28px #092d3d55}
+.panel{background:rgba(7,31,46,.97)}
+@media(max-width:850px){
+ #landing{display:block;padding:0}.site-header{height:62px;padding:0 14px}
+ .brand{font-size:9px;letter-spacing:2px}.brand-mark{width:30px;height:30px}
+ .header-btn{padding:8px 9px;font-size:8px}
+ .intro{left:14px;right:14px;bottom:12px;max-width:none;padding:14px 16px;border-radius:18px}
+ .hero-title{font-size:clamp(39px,10vw,58px);letter-spacing:-2px;margin:9px 0}
+ .overline{font-size:7px;letter-spacing:2px}.hero-copy{font-size:10px;line-height:1.45;margin:0;max-width:310px}
+ .intro-meta{display:none}.start-hint{font-size:8px;margin-top:8px}
+ .atlas{inset:3% 0 25%;height:72%;min-height:0}.atlas-halo{width:112vw}
+ .atlas-ocean{width:115vw;height:76vw;max-height:54vh;transform:rotateX(58deg) rotate(-8deg)}
+ .island{width:clamp(76px,19vw,105px);gap:5px}.island-visual{height:76px}
+ .island-ground{height:35px;bottom:7px;border-width:3px}.island-hill{bottom:36px;width:43px;height:33px}
+ .island-house{bottom:36px;width:19px;height:16px}.island-house:before{top:-10px;width:27px;height:13px;left:-5px}
+ .island-tree{bottom:34px;height:17px;width:6px}.island-tree:before{top:-14px;left:-7px;width:21px;height:22px}
+ .island-flag{font-size:16px}.island-name{font-size:8px;padding:4px 8px}
+ .atlas-label{bottom:0;font-size:6px;letter-spacing:2px}
+ .world-title{top:12%;left:12px;max-width:72%;padding:13px 15px}
+ .world-title h1{font-size:clamp(39px,11vw,60px)}.world-title p{font-size:9px;max-width:220px}
+ .scene-wrap{inset:22% -24% 15%;transform:scale(1.03)}
+ .scene-tools{top:auto;right:10px;bottom:105px;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;max-width:48%;gap:5px}
+ .scene-tool{font-size:7px;padding:7px 9px}.destination-bar{bottom:6px}
+ .region-rail{max-width:100%;padding-bottom:9px}.region-card{flex-basis:91px}
+}
+@media(max-width:380px){.brand span:last-child{display:none}.header-right{gap:5px}.intro{bottom:10px}.hero-title{font-size:38px}.atlas{inset:5% 0 29%;height:66%}.island{width:72px}.island-name{font-size:7px}.scene-tools{max-width:53%;bottom:98px}}
+
 </style>
 </head>
 <body>
