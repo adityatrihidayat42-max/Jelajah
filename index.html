@@ -305,6 +305,144 @@
 }
 @media(prefers-reduced-motion:reduce){#art .tree,#art .tiny-person,#art .boat,#art .clouds,#art .birds,#art .wave-lines path,#art .fireflies circle,#art .rain path,#art .snow circle{animation:none!important}}
 
+
+/* ==========================================================
+   JELAJAH / THE LIVING ATLAS — IMMERSIVE ART DIRECTION
+   Layered island craft, atmospheric depth, tactile controls
+   ========================================================== */
+#landing{isolation:isolate}
+#landing:before{z-index:0;opacity:.18;background-size:42px 42px}
+#landing:after{z-index:1;pointer-events:none}
+.atlas{overflow:visible;isolation:isolate}
+.atlas-halo{z-index:0;animation:atlasHalo 9s ease-in-out infinite alternate}
+.atlas-ocean{z-index:1;overflow:hidden;transform:rotateX(58deg) rotate(-9deg) translateY(2%);transform-style:preserve-3d}
+.atlas-ocean:before,.atlas-ocean:after{pointer-events:none}
+.atlas-ocean:before{border-style:dashed;animation:seaOrbit 48s linear infinite}
+.atlas-ocean:after{animation:seaOrbitReverse 62s linear infinite}
+.atlas-orbit{position:absolute;z-index:1;left:50%;top:50%;width:min(77vw,1030px);height:min(48vw,640px);border:1px solid #d7fff044;border-radius:50%;transform:translate(-50%,-50%) rotate(-12deg);pointer-events:none}
+.orbit-b{width:min(65vw,860px);height:min(38vw,500px);border-style:dashed;border-color:#e5f3d82a;transform:translate(-50%,-50%) rotate(18deg)}
+.atlas-cloud{position:absolute;z-index:3;width:140px;height:55px;opacity:.55;filter:drop-shadow(0 9px 9px #092c3d35);pointer-events:none;animation:cloudFloat 13s ease-in-out infinite alternate}
+.atlas-cloud i{position:absolute;bottom:4px;display:block;border-radius:50%;background:linear-gradient(180deg,#fff9e9,#c9e7d9)}
+.atlas-cloud i:nth-child(1){left:5px;width:58px;height:29px}
+.atlas-cloud i:nth-child(2){left:42px;bottom:10px;width:57px;height:43px}
+.atlas-cloud i:nth-child(3){right:4px;width:60px;height:27px}
+.cloud-a{left:17%;top:20%;transform:scale(.85)}
+.cloud-b{right:9%;top:28%;transform:scale(1.05);animation-delay:-5s}
+.cloud-c{left:44%;bottom:14%;transform:scale(.62);animation-delay:-8s}
+.atlas-compass{position:absolute;z-index:5;right:8%;top:17%;width:54px;height:54px;border:1px solid #e6f5df66;border-radius:50%;display:grid;place-items:center;color:#f4d8aa;background:#0b344b88;box-shadow:0 10px 28px #051f2d55;backdrop-filter:blur(8px);font-family:Georgia,serif}
+.atlas-compass b{font-size:24px;font-weight:400}.atlas-compass span,.atlas-compass small{position:absolute;font:700 7px system-ui;letter-spacing:1px}.atlas-compass span{top:5px}.atlas-compass small{bottom:4px}
+.atlas-coord{position:absolute;z-index:5;top:13%;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:3px;color:#e6f3dfb8;white-space:nowrap;text-shadow:0 2px 9px #08283a}
+.atlas-coord span{color:#f2c995;padding:0 8px}
+.atlas-bottom-note{position:absolute;z-index:6;right:clamp(24px,5vw,80px);bottom:7%;display:flex;align-items:center;gap:9px;padding:11px 14px;border:1px solid #e1f5e14a;border-radius:4px 13px 4px 13px;background:#092e43c9;box-shadow:0 12px 30px #041d2e55;backdrop-filter:blur(12px);font-size:7px;letter-spacing:1.5px;color:#d4e8db}
+.atlas-bottom-note b{color:#f3d2a0;font-size:7px}.atlas-bottom-note i{font-size:16px;color:#f2d49d;font-style:normal}
+.live-pulse{width:6px;height:6px;border-radius:50%;background:#a9e0b2;box-shadow:0 0 0 4px #a9e0b222,0 0 14px #a9e0b2;animation:pulseLive 1.8s ease-in-out infinite}
+#islands{position:absolute;inset:0;z-index:4;pointer-events:none}
+.island{pointer-events:auto;isolation:isolate;transform-origin:50% 65%;will-change:transform}
+.island:before{content:"";position:absolute;z-index:-1;left:13%;right:13%;bottom:30px;height:20px;border-radius:50%;background:#041e2b55;filter:blur(12px);opacity:.75;transition:all .35s}
+.island:hover:before{transform:scale(1.18);opacity:.95;filter:blur(16px)}
+.island-visual{height:112px;perspective:420px;transform-style:preserve-3d}
+.island-ground{overflow:hidden;isolation:isolate;transform:rotate(-7deg) rotateX(8deg);background:linear-gradient(155deg,#e5e9b4 0%,var(--island-accent) 22%,var(--island) 48%,#4d8068 78%,#275a58 100%)}
+.island-ground:before{content:"";position:absolute;inset:5px 8px 48%;border-radius:50%;background:linear-gradient(180deg,#ffffff9c,#ffffff00);opacity:.65}
+.island-shadow{position:absolute;z-index:0;left:10%;right:9%;bottom:1px;height:20px;border-radius:50%;background:#0b3348;filter:blur(5px)}
+.island-ridge{position:absolute;z-index:2;left:18%;bottom:46px;width:63px;height:34px;clip-path:polygon(0 100%,18% 40%,36% 63%,59% 0,100% 100%);background:linear-gradient(140deg,#e4e8b3,#91bd7c 52%,#4f8769);filter:drop-shadow(0 4px 2px #29574455)}
+.island-road{position:absolute;z-index:3;left:26%;bottom:17px;width:58px;height:13px;border:3px solid #e6d1a5;border-bottom:0;border-radius:50% 50% 0 0;transform:rotate(-13deg);opacity:.95}
+.island-house{z-index:5;bottom:48px;left:49%;width:20px;height:18px;border-radius:2px 2px 1px 1px;background:linear-gradient(90deg,#f6e5c1,#d8b98c);box-shadow:inset -4px 0 #a8795a,0 3px 0 #8c6348}
+.island-house:before{width:31px;height:16px;left:-6px;top:-12px;background:linear-gradient(145deg,#d88c68,#9f5349);filter:drop-shadow(0 2px 1px #4a514355)}
+.island-house.second{left:26%;bottom:42px;transform:scale(.68);transform-origin:bottom}
+.island-house.second:before{background:linear-gradient(145deg,#e9c58a,#b57b51)}
+.island-tree{z-index:6;bottom:44px;right:16%;width:5px;height:17px;border-radius:3px;background:#76543b}
+.island-tree:before{left:-8px;top:-15px;width:21px;height:22px;background:radial-gradient(circle at 35% 25%,#b3d38a,#6eaa70 65%,#467c61);box-shadow:7px 4px 0 -2px #8bbd79,-5px 7px 0 -3px #4f8c68}
+.island-tree.second{right:37%;bottom:39px;transform:scale(.72)}
+.island-water{position:absolute;z-index:4;left:8%;bottom:17px;width:23px;height:8px;border-radius:50%;background:linear-gradient(180deg,#c5f2e6,#48a8a7);box-shadow:0 0 0 3px #d9efc766}
+.island-person{position:absolute;z-index:8;left:67%;bottom:23px;width:4px;height:10px;border-radius:5px;background:#f2d4a5;box-shadow:0 -5px 0 -1px #d9a17b}
+.island-person:after{content:"";position:absolute;left:-3px;top:5px;width:10px;height:2px;background:#f2d4a5;transform:rotate(-20deg)}
+.island-person.second{left:38%;bottom:26px;transform:scale(.75);background:#e9b7a0}
+.island-spark{position:absolute;z-index:8;left:14%;top:9px;width:5px;height:5px;border-radius:50%;background:#fff0b7;box-shadow:0 0 12px 4px #fff0b766;animation:sparkle 2.8s ease-in-out infinite}
+.island-style-1 .island-ground{background:linear-gradient(155deg,#f5d9bd 0%,#e8a9b7 28%,#b67d7f 66%,#805c69)}
+.island-style-1 .island-hill{background:linear-gradient(135deg,#f6d7d1,#d58f9c 65%,#936879)}
+.island-style-1 .island-house:before{background:linear-gradient(145deg,#b94f54,#773f50)}
+.island-style-2 .island-ground{background:linear-gradient(155deg,#e7e7b8 0%,#9bc5a1 35%,#5f927b 72%,#3d6c65)}
+.island-style-2 .island-ridge{background:linear-gradient(140deg,#d9ebd0,#7eae83 60%,#477b6b)}
+.island-style-3 .island-ground{background:linear-gradient(155deg,#f1e3bf 0%,#d9b27e 35%,#b17d57 72%,#785b4d)}
+.island-style-3 .island-hill{background:linear-gradient(140deg,#f5d9a3,#c59662 65%,#99724e)}
+.island-style-4 .island-ground{background:linear-gradient(155deg,#d9e6d4 0%,#a4c5c4 34%,#628f8b 70%,#3c666d)}
+.island-style-4 .island-ridge{background:linear-gradient(140deg,#e5efe0,#a1c4bb 58%,#658e87)}
+.island-name{position:relative;z-index:10;transition:transform .25s,background .25s,color .25s;box-shadow:0 7px 20px #061d2d66}
+.island:hover .island-name{transform:translateY(-3px) scale(1.04)}
+.island:hover .island-visual{filter:brightness(1.1) saturate(1.08)}
+.island:active{transform:translate(-50%,-53%) scale(.96)}
+@keyframes atlasHalo{from{opacity:.6;scale:.97}to{opacity:1;scale:1.04}}
+@keyframes seaOrbit{to{transform:rotate(378deg)}}
+@keyframes seaOrbitReverse{to{transform:rotate(-377deg)}}
+@keyframes cloudFloat{from{translate:-12px 0}to{translate:18px -9px}}
+@keyframes pulseLive{50%{opacity:.45;box-shadow:0 0 0 7px #a9e0b211,0 0 20px #a9e0b2}}
+@keyframes sparkle{0%,100%{opacity:.25;scale:.7}50%{opacity:1;scale:1.4}}
+#world{background:#123d4b}
+.world-sky{background-image:radial-gradient(ellipse at 75% 12%,#fff3c566,transparent 22%),linear-gradient(180deg,#7cb6b3,#c4d2b0 55%,#d5b78d)}
+.world-title{backdrop-filter:blur(16px)}
+.scene-wrap{filter:drop-shadow(0 34px 28px #102e3d55)}
+#art{filter:drop-shadow(0 18px 20px #102e3d33) saturate(1.08)}
+.destination-info{border:1px solid #f1dfb966;box-shadow:0 15px 38px #092d3c55,inset 0 1px #fff2}
+.region-card{border-color:#d9f0dc66;box-shadow:0 12px 25px #082b3b66}
+.region-card.active{box-shadow:0 15px 30px #071f2e66, inset 0 1px #fff}
+.scene-tool{box-shadow:0 9px 25px #092c3c66,inset 0 1px #fff2}
+@media(max-width:850px){
+ .atlas-orbit{width:125vw;height:80vw}
+ .orbit-b{width:110vw;height:68vw}
+ .atlas-coord{top:5%;font-size:6px;letter-spacing:2px}
+ .atlas-compass{right:5%;top:13%;width:39px;height:39px}
+ .atlas-compass b{font-size:17px}
+ .atlas-cloud{scale:.7}
+ .cloud-a{left:2%;top:20%}.cloud-b{right:-9%;top:30%}.cloud-c{left:37%;bottom:14%}
+ .atlas-bottom-note{right:13px;bottom:4%;padding:8px 10px;gap:6px;font-size:6px}
+ .atlas-bottom-note b{font-size:6px}
+ .island-visual{height:82px}
+ .island-ground{height:34px;bottom:8px}
+ .island-shadow{bottom:1px;height:12px}
+ .island-ridge{bottom:35px;width:43px;height:26px}
+ .island-road{bottom:13px;transform:scale(.75) rotate(-13deg)}
+ .island-house{bottom:35px;transform:scale(.78);transform-origin:bottom left}
+ .island-house.second{bottom:31px;transform:scale(.55)}
+ .island-tree{bottom:33px;transform:scale(.75)}
+ .island-tree.second{bottom:30px}
+ .island-water{bottom:13px;transform:scale(.75)}
+ .island-person{bottom:18px;transform:scale(.8)}
+ .island-person.second{bottom:20px}
+}
+@media(max-width:600px){
+ .atlas-coord{top:4%;font-size:5px;letter-spacing:1.5px}
+ .atlas-compass{top:10%;right:4%;width:33px;height:33px}
+ .atlas-cloud{opacity:.42;scale:.55}
+ .atlas-bottom-note{bottom:3%;right:8px;padding:6px 8px}
+ .atlas-bottom-note span:nth-child(2){display:none}
+ .atlas-bottom-note i{font-size:12px}
+ .island{width:74px}
+ .island-visual{height:60px}
+ .island-ground{height:25px;bottom:7px;border-width:2px}
+ .island-shadow{height:9px}
+ .island-hill{bottom:24px;width:28px;height:23px}
+ .island-ridge{bottom:24px;width:32px;height:20px}
+ .island-road{bottom:10px;transform:scale(.56) rotate(-13deg)}
+ .island-house{bottom:24px;transform:scale(.55);transform-origin:bottom left}
+ .island-house.second{bottom:22px;transform:scale(.4)}
+ .island-tree{bottom:22px;transform:scale(.55);transform-origin:bottom}
+ .island-tree.second{bottom:21px}
+ .island-water{bottom:9px;transform:scale(.55)}
+ .island-person{bottom:13px;transform:scale(.55)}
+ .island-person.second{bottom:14px}
+ .island-spark{width:3px;height:3px}
+ .atlas-bottom-note{display:none}
+ .atlas-label{bottom:1%;font-size:5px}
+}
+@media(max-width:390px){
+ .atlas{inset:0 0 21%}
+ .atlas-coord{top:3%}
+ .atlas-compass{top:8%}
+}
+@media(prefers-reduced-motion:reduce){
+ .atlas-halo,.atlas-ocean:before,.atlas-ocean:after,.atlas-cloud,.live-pulse,.island-spark{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -312,7 +450,14 @@
 <header class="site-header"><div class="brand"><span class="brand-mark">✦</span> JELAJAH <span style="opacity:.55;font-weight:500;letter-spacing:1px">/ MINIATURE WORLDS</span></div><div class="header-right"><button class="header-btn" id="language">ID / EN</button><button class="header-btn" id="sound">♫ SOUND OFF</button><button class="header-btn" id="hamb">MENU</button></div></header>
 <section id="landing">
 <div class="intro"><div class="overline">ATLAS DUNIA MINIATUR</div><h1 class="hero-title">Dunia kecil,<span>petualangan besar.</span></h1><p class="hero-copy" id="landingSub">Jelajahi kepulauan miniatur, temukan tempat-tempat istimewa, dan ikuti cerita kecil yang tersembunyi di setiap sudut dunia.</p><div class="intro-meta"><div class="meta-item"><strong>10</strong><small>NEGARA</small></div><div class="meta-item"><strong>50</strong><small>DESTINASI</small></div><div class="meta-item"><strong>∞</strong><small>CERITA</small></div></div><div class="start-hint"><span class="hint-dot"></span> SENTUH SALAH SATU PULAU UNTUK MENJELAJAH</div></div>
-<div class="atlas"><div class="atlas-halo"></div><div class="atlas-ocean"></div><div id="islands"></div><div class="atlas-label">10 NEGARA · 50 DESTINASI · SATU DUNIA UNTUK DIJELAJAHI</div></div>
+<div class="atlas"><div class="atlas-halo"></div><div class="atlas-ocean"></div>
+<div class="atlas-orbit orbit-a"></div><div class="atlas-orbit orbit-b"></div>
+<div class="atlas-cloud cloud-a"><i></i><i></i><i></i></div><div class="atlas-cloud cloud-b"><i></i><i></i><i></i></div><div class="atlas-cloud cloud-c"><i></i><i></i><i></i></div>
+<div class="atlas-compass"><span>N</span><b>✦</b><small>S</small></div>
+<div class="atlas-coord">THE LIVING ATLAS <span>•</span> 10 ISLANDS</div>
+<div id="islands"></div>
+<div class="atlas-bottom-note"><span class="live-pulse"></span><span>WORLD STATUS</span><b>ALWAYS IN MOTION</b><i>✧</i></div>
+<div class="atlas-label">10 NEGARA · 50 DESTINASI · SATU DUNIA UNTUK DIJELAJAHI</div></div>
 </section>
 <section id="world" class="hidden"><div class="world-sky" id="sky"></div><div class="world-top"><button class="back-btn" id="backHome">← SEMUA NEGARA</button><div class="world-brand">JELAJAH · FIELD JOURNAL</div></div><div class="world-title"><div class="eyebrow" id="eyebrow">INDONESIA · 01 / 05</div><h1 id="title">BALI</h1><p id="desc">Pulau dewata, budaya, dan lanskap tropis.</p></div><div class="scene-wrap" id="sceneWrap"><svg id="art" viewBox="0 0 1000 620" role="img" aria-label="Lanskap miniatur"></svg></div><div class="scene-tools"><button class="scene-tool" id="mapBtn">⌖ MINI MAP</button><button class="scene-tool" id="weatherBtn">☀ CUACA</button><button class="scene-tool" id="timeBtn">◷ PAGI</button><button class="scene-tool" id="photoBtn">◎ FOTO</button><button class="scene-tool" id="favBtn">♡ FAVORIT</button></div><div class="destination-bar"><div class="destination-info"><small>NOW EXPLORING</small><strong id="destinationName">Bali</strong></div><div class="region-rail" id="regions"></div></div></section>
 <div class="menu" id="menu"><button data-menu="about">ABOUT JELAJAH</button><button data-menu="passport">DIGITAL PASSPORT</button><button data-menu="favorites">SAVED PLACES</button></div>
@@ -404,7 +549,7 @@ function weatherPanel(){panel("Weather",'<h2>Ubah suasana</h2><p>Atur cuaca dan 
 function photo(){let s=$("#art").cloneNode(true);s.setAttribute("xmlns","http://www.w3.org/2000/svg");let blob=new Blob([new XMLSerializer().serializeToString(s)],{type:"image/svg+xml"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="jelajah-"+C[ci][1].toLowerCase()+"-"+C[ci][4][ri][0].toLowerCase().replace(/\s+/g,"-")+".svg";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast("Ilustrasi disimpan")}
 function toggleFav(){let k=ci+"-"+ri;favs=favs.includes(k)?favs.filter(x=>x!==k):favs.concat(k);localStorage.setItem("jelajahFavs",JSON.stringify(favs));render();toast(favs.includes(k)?"Ditambahkan ke favorit":"Dihapus dari favorit")}
 function action(a){$("#menu").classList.remove("open");if(a==="home"){close();$("#landing").classList.remove("hide");$("#world").classList.add("hidden")}if(a==="about")about();if(a==="passport")passport();if(a==="favorites")favorites()}
-$("#islands").innerHTML=C.map((c,i)=>'<button class="island" data-i="'+i+'" style="left:'+[14,31,49,68,85,21,41,60,79,51][i]+'%;top:'+[36,23,39,25,40,67,70,68,68,54][i]+'%;--island:'+c[2]+'"><span class="island-visual"><i class="island-ground"></i><i class="island-hill"></i><i class="island-house"></i><i class="island-tree"></i><b class="island-flag">'+c[0]+'</b></span><span class="island-name">'+c[1]+'</span></button>').join("");
+$("#islands").innerHTML=C.map((c,i)=>'<button class="island island-style-'+(i%5)+'" data-i="'+i+'" aria-label="Jelajahi '+c[1]+'" style="left:'+[14,31,49,68,85,21,41,60,79,51][i]+'%;top:'+[36,23,39,25,40,67,70,68,68,54][i]+'%;--island:'+c[2]+';--island-accent:'+c[3][0]+'"><span class="island-visual"><i class="island-shadow"></i><i class="island-ground"></i><i class="island-hill"></i><i class="island-ridge"></i><i class="island-road"></i><i class="island-house"></i><i class="island-house second"></i><i class="island-tree"></i><i class="island-tree second"></i><i class="island-water"></i><i class="island-person"></i><i class="island-person second"></i><b class="island-flag">'+c[0]+'</b><i class="island-spark"></i></span><span class="island-name">'+c[1]+'</span></button>').join("");
 $("#islands").querySelectorAll("button").forEach(b=>b.onclick=()=>enter(+b.dataset.i));
 document.querySelectorAll("[data-menu]").forEach(b=>b.onclick=()=>action(b.dataset.menu));
 $("#hamb").onclick=()=>$("#menu").classList.toggle("open");$("#backHome").onclick=()=>action("home");$("#close").onclick=close;$("#overlay").onclick=close;$("#mapBtn").onclick=miniMap;$("#weatherBtn").onclick=weatherPanel;$("#photoBtn").onclick=photo;$("#favBtn").onclick=toggleFav;$("#timeBtn").onclick=()=>{time=(time+1)%4;render()};$("#sceneWrap").onclick=e=>{if(!e.target.closest("button"))$("#sceneWrap").classList.toggle("zoom")};
