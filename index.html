@@ -604,6 +604,50 @@
  .atlas-three-canvas{z-index:4}
  .has-three-atlas .atlas-bottom-note{bottom:4%}
 }
+
+/* JELAJAH — MOBILE ART DIRECTION PASS */
+@media(max-width:850px){
+  #landing{display:block;position:absolute;inset:0;padding:0;overflow:hidden;min-height:0;height:100%;background:radial-gradient(ellipse at 50% 43%,#286b70 0%,#124352 50%,#092b3c 100%)}
+  #landing:before{opacity:.13;background-size:28px 28px}
+  .site-header{height:60px;padding:0 13px;background:linear-gradient(180deg,#09283be8,#0c3545a8);backdrop-filter:blur(14px)}
+  .brand{font-size:10px;letter-spacing:2px;gap:8px}
+  .brand-mark{width:30px;height:30px;border-radius:10px}
+  .header-right{gap:5px}
+  .header-btn{font-size:8px;letter-spacing:.7px;padding:8px 9px}
+  .atlas{position:absolute;left:0;right:0;top:66px;bottom:250px;width:100%;height:auto;min-height:0;z-index:2;overflow:hidden}
+  .atlas-three-canvas{z-index:4;touch-action:pan-y}
+  .has-three-atlas .atlas-label{bottom:3%;font-size:7px;letter-spacing:2px}
+  .has-three-atlas .atlas-bottom-note{bottom:7%;right:12px}
+  .intro{position:absolute;left:13px;right:13px;bottom:11px;z-index:12;width:auto;max-width:none;max-height:228px;overflow:hidden;padding:14px 15px 13px;border:1px solid #d9f1df55;border-radius:18px 18px 7px 18px;background:linear-gradient(145deg,#0a3044f2,#104657f0 68%,#15505aeF);box-shadow:0 18px 44px #0318278c,inset 0 1px #ffffff20;backdrop-filter:blur(20px)}
+  .overline{font-size:7px;letter-spacing:2px;gap:9px}
+  .overline:before{width:23px}
+  .hero-title{font-size:clamp(32px,8.7vw,39px);line-height:.91;letter-spacing:-1.4px;margin:8px 0 7px}
+  .hero-title span{display:inline;color:#f2cb91;margin-left:7px}
+  .hero-copy{max-width:100%;font-size:9px;line-height:1.42;margin:0 0 8px;color:#d2e1d9}
+  .intro-meta{display:none}
+  .start-hint{margin-top:6px;font-size:7px;letter-spacing:.8px;gap:8px;white-space:nowrap}
+  .hint-dot{width:6px;height:6px;flex:0 0 6px;box-shadow:0 0 0 4px #eac48c20}
+  .hero-actions{display:flex;align-items:center;margin-top:9px;gap:8px}
+  .hero-primary{padding:10px 13px;font-size:7px;letter-spacing:1px;gap:12px;border-radius:5px 12px 5px 12px}
+  .hero-note{font-size:6px;letter-spacing:.6px}
+  .atlas-label{bottom:2%;font-size:6px;letter-spacing:1px}
+  .world-top{padding-top:8px}
+}
+@media(max-width:390px){
+  .site-header{padding:0 10px}
+  .brand{font-size:9px;letter-spacing:1.4px}
+  .header-btn{padding:7px 7px;font-size:7px}
+  .atlas{bottom:238px}
+  .intro{left:10px;right:10px;bottom:9px;padding:12px 13px 11px;max-height:218px}
+  .hero-title{font-size:33px;letter-spacing:-1.2px}
+  .hero-copy{font-size:8px}
+  .start-hint{font-size:6px;letter-spacing:.5px}
+  .hero-note{display:none}
+}
+@media(min-width:851px){
+  .atlas-three-canvas{z-index:2}
+  .intro{z-index:4}
+}
 </style>
 </head>
 <body>
