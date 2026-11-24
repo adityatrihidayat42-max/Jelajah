@@ -230,7 +230,6 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.m
     if(nearest>=0&&best<Math.max(58,rect.width*.14))selectIsland(nearest);
   };
   canvas.addEventListener("pointerup",e=>{dragging=false;if(!dragged)pickAt(e)});
-  canvas.addEventListener("click",e=>{if(!dragged)pickAt(e)});
 
   canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=THREE.MathUtils.clamp(zoom+(e.deltaY>0?-.08:.08),.78,1.25);camera.position.multiplyScalar(zoom);},{passive:false});
   canvas.addEventListener("pointercancel",()=>dragging=false);
